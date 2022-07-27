@@ -8,10 +8,10 @@ import java.util.List;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @Getter
-public class DetailedGetPatientDTO extends PartialPatientDTO {
+public class DetailedPatientDTO extends PartialPatientDTO {
     private List<PartialAppointmentDTO> takenAppointments;
 
-    public DetailedGetPatientDTO(Long id, String dni, String fullName, Integer age, List<PartialAppointmentDTO> takenAppointments) {
+    public DetailedPatientDTO(Long id, String dni, String fullName, Integer age, List<PartialAppointmentDTO> takenAppointments) {
         super(id, dni, fullName, age);
         this.takenAppointments = takenAppointments;
     }
