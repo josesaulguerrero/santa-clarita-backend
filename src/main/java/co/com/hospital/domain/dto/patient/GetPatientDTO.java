@@ -4,7 +4,6 @@ import lombok.*;
 
 @ToString(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 public class GetPatientDTO extends GetPartialPatientDTO {
     // TODO add the clinical history DTO.
