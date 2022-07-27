@@ -4,9 +4,7 @@ import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class CreateAndUpdatePatientDTO {
     private Long id;
     private String dni;

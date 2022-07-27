@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class GetPartialPatientDTO{
-    private Long id;
-    private String dni;
-    private String fullName;
-    private Integer age;
+    protected Long id;
+    protected String dni;
+    protected String fullName;
+    protected Integer age;
 }
