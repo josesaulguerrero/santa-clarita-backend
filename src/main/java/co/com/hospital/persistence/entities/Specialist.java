@@ -19,10 +19,12 @@ public class Specialist extends Person {
     @Column(name = "is_available", nullable = false)
     private Boolean isAvailable;
 
-    // TODO add relationship to associated department.
+    @OneToOne(mappedBy = "specialistInCharge")
+    private Specialty associatedSpecialty;
 
-    public Specialist(String DNI, String fullName, Integer age, Boolean isAvailable) {
+    public Specialist(String DNI, String fullName, Integer age, Boolean isAvailable, Specialty associatedSpecialty) {
         super(DNI, fullName, age);
         this.isAvailable = isAvailable;
+        this.associatedSpecialty = associatedSpecialty;
     }
 }

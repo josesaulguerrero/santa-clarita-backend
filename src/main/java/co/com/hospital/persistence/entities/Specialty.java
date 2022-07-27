@@ -18,5 +18,12 @@ public class Specialty {
 
     private String name;
 
-    // TODO set up relationship with appointments and Specialist
+    @OneToOne
+    @JoinColumn(name = "fk_specialist", unique = true, insertable = false, updatable = false)
+    private Specialist specialistInCharge;
+
+    public Specialty(String name, Specialist specialistInCharge) {
+        this.name = name;
+        this.specialistInCharge = specialistInCharge;
+    }
 }
