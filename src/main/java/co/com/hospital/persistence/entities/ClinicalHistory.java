@@ -19,9 +19,15 @@ public class ClinicalHistory {
     @GeneratedValue(generator = "clinical_history_id_generator")
     private String id;
 
-    @OneToMany(mappedBy = "associatedClinicalHistory")
+    @OneToMany(mappedBy = "associatedClinicalHistory", fetch = FetchType.EAGER)
     private List<Appointment> appointments;
 
-    // TODO set up relationship to patient
-    // TODO add no-id constructor.
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_patient", unique = true, insertable = false, updatable = false)
+    private Patient associatedPatient;
+
+    public ClinicalHistory(List<Appointment> appointments, Patient associatedPatient) {
+        this.appointments = appointments;
+        this.associatedPatient = associatedPatient;
+    }
 }

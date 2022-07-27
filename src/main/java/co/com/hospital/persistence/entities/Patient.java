@@ -16,9 +16,11 @@ public class Patient extends Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //TODO add clinical history relationship
+    @OneToOne(mappedBy = "associatedPatient", orphanRemoval = true)
+    private ClinicalHistory clinicalHistory;
 
-    public Patient(String DNI, String fullName, Integer age) {
+    public Patient(String DNI, String fullName, Integer age, ClinicalHistory clinicalHistory) {
         super(DNI, fullName, age);
+        this.clinicalHistory = clinicalHistory;
     }
 }
