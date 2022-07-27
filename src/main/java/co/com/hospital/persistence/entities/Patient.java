@@ -17,4 +17,8 @@ public class Patient extends Person {
     private Long id;
 
     //TODO add clinical history relationship
+
+    public Patient(String DNI, String fullName, Integer age) {
+        super(DNI, fullName, age);
+    }
 }
