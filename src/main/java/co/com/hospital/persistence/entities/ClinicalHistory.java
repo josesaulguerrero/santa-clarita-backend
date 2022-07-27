@@ -3,10 +3,8 @@ package co.com.hospital.persistence.entities;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "clinical_histories")
@@ -21,6 +19,9 @@ public class ClinicalHistory {
     @GeneratedValue(generator = "clinical_history_id_generator")
     private String id;
 
-    // TODO set up relationship to patient and associated appointments.
+    @OneToMany(mappedBy = "associatedClinicalHistory")
+    private List<Appointment> appointments;
+
+    // TODO set up relationship to patient
     // TODO add no-id constructor.
 }

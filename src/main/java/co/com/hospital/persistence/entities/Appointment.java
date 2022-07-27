@@ -21,5 +21,9 @@ public class Appointment {
     @Column(nullable = false)
     private LocalDateTime date;
 
-    // TODO set up relationship with ClinicalHistory and Specialty.
+    @ManyToOne
+    @JoinColumn(name = "fk_clinical_history", nullable = false, updatable = false, insertable = false)
+    private ClinicalHistory associatedClinicalHistory;
+
+    // TODO set up relationship with Specialty.
 }
