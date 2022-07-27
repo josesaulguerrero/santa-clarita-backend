@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @Getter
-public class GetAppointmentDTO extends GetPartialAppointmentDTO {
+public class DetailedAppointmentDTO extends PartialAppointmentDTO {
     // TODO add the specialty partial DTO.
     // TODO add all-args constructor that calls super().
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class GetPartialPatientDTO{
+public class PartialPatientDTO {
     protected Long id;
     protected String dni;
     protected String fullName;

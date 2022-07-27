@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class GetPartialAppointmentDTO {
+public class PartialAppointmentDTO {
     protected Long id;
     protected LocalDateTime date;
 }
