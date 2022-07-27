@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "specialists")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -24,6 +23,13 @@ public class Specialist extends Person {
 
     public Specialist(String DNI, String fullName, Integer age, Boolean isAvailable, Specialty associatedSpecialty) {
         super(DNI, fullName, age);
+        this.isAvailable = isAvailable;
+        this.associatedSpecialty = associatedSpecialty;
+    }
+
+    public Specialist(String DNI, String fullName, Integer age, Long id, Boolean isAvailable, Specialty associatedSpecialty) {
+        super(DNI, fullName, age);
+        this.id = id;
         this.isAvailable = isAvailable;
         this.associatedSpecialty = associatedSpecialty;
     }

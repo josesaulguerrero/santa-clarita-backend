@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "patients")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -21,6 +20,12 @@ public class Patient extends Person {
 
     public Patient(String DNI, String fullName, Integer age, ClinicalHistory clinicalHistory) {
         super(DNI, fullName, age);
+        this.clinicalHistory = clinicalHistory;
+    }
+
+    public Patient(String DNI, String fullName, Integer age, Long id, ClinicalHistory clinicalHistory) {
+        super(DNI, fullName, age);
+        this.id = id;
         this.clinicalHistory = clinicalHistory;
     }
 }
