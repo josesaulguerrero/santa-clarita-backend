@@ -1,16 +1,20 @@
-package co.com.hospital.domain.dto.patient;
+package co.com.hospital.domain.dto.appointment;
 
 import co.com.hospital.utils.RuntimeExceptionBuilder;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CreateAndUpdatePatientDTO {
+public class CreateAndUpdateAppointmentDTO {
     private Long id;
-    private String dni;
-    private String fullName;
-    private Integer age;
+    private LocalDateTime date;
+    private Long clinicalHistoryId;
+    private Long specialtyId;
 
     private boolean idIsNull() {
         return this.getId() != null;
