@@ -1,5 +1,5 @@
 package co.com.hospital.domain.dto;
 
-public interface DTO {
+public interface ModifiableDTO {
     Boolean validate();
 }
