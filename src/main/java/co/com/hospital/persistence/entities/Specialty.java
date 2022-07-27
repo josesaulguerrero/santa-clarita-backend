@@ -3,6 +3,7 @@ package co.com.hospital.persistence.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "specialties")
@@ -22,8 +23,12 @@ public class Specialty {
     @JoinColumn(name = "fk_specialist", unique = true, insertable = false, updatable = false)
     private Specialist specialistInCharge;
 
-    public Specialty(String name, Specialist specialistInCharge) {
+    @OneToMany(mappedBy = "specialtyInCharge")
+    private List<Appointment> associatedAppointments;
+
+    public Specialty(String name, Specialist specialistInCharge, List<Appointment> associatedAppointments) {
         this.name = name;
         this.specialistInCharge = specialistInCharge;
+        this.associatedAppointments = associatedAppointments;
     }
 }
