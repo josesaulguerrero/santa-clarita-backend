@@ -3,10 +3,10 @@ package co.com.hospital.utils;
 import java.lang.reflect.Constructor;
 
 public class RuntimeExceptionBuilder {
-    private final Class<? extends RuntimeException> exceptionClass;
-    private String developerMessage = "No message was supplied...";
+    protected final Class<? extends RuntimeException> exceptionClass;
+    protected String developerMessage = "No message was supplied...";
 
-    public<K extends RuntimeException> RuntimeExceptionBuilder(Class<K> exceptionClass) {
+    public <K extends RuntimeException> RuntimeExceptionBuilder(Class<K> exceptionClass) {
         this.exceptionClass = exceptionClass;
     }
 
@@ -16,12 +16,12 @@ public class RuntimeExceptionBuilder {
     }
 
     public RuntimeException build() {
-        return getExceptionInstance();
+        return getExceptionInstance(this.exceptionClass);
     }
 
-    private RuntimeException getExceptionInstance() {
+    protected <K extends RuntimeException> K getExceptionInstance(Class<K> clazz) {
         try {
-            Constructor<? extends RuntimeException> declaredConstructor = this.exceptionClass.getDeclaredConstructor(String.class);
+            Constructor<K> declaredConstructor = clazz.getDeclaredConstructor(String.class);
             return declaredConstructor.newInstance(this.developerMessage);
         } catch (Exception e) {
             throw new IllegalArgumentException(e);
