@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 public class GetPatientDTO extends GetPartialPatientDTO {
-    // TODO add the clinical history DTO.
+    // TODO add a list with the assigned appointments.
     // TODO add all-args constructor that calls super().
     // TODO FieldDTO to validate updatable fields?
 }
