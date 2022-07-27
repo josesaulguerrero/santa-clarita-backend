@@ -1,5 +1,7 @@
 package co.com.hospital.utils;
 
+import java.lang.reflect.Constructor;
+
 public class RuntimeExceptionBuilder {
     private final Class<? extends RuntimeException> exceptionClass;
     private String developerMessage = "No message was supplied...";
@@ -19,7 +21,8 @@ public class RuntimeExceptionBuilder {
 
     private RuntimeException getExceptionInstance() {
         try {
-            return this.exceptionClass.getDeclaredConstructor(String.class).newInstance(this.developerMessage);
+            Constructor<? extends RuntimeException> declaredConstructor = this.exceptionClass.getDeclaredConstructor(String.class);
+            return declaredConstructor.newInstance(this.developerMessage);
         } catch (Exception e) {
             throw new IllegalArgumentException(e);
         }
