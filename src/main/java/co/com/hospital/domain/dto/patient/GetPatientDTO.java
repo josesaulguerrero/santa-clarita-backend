@@ -8,4 +8,5 @@ import lombok.ToString;
 public class GetPatientDTO extends GetPartialPatientDTO {
     // TODO add the clinical history DTO.
     // TODO add all-args constructor that calls super().
+    // TODO FieldDTO to validate updatable fields?
 }
