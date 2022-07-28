@@ -40,8 +40,7 @@ public class AppointmentMapper {
     }
 
     public Appointment createDTOToEntity(CreateAppointmentDTO dto) {
-        ClinicalHistory clinicalHistory = null; // TODO inject clinical history service and find by id;
-        Specialty specialty = null; // TODO inject specialty service and find by id;
-        return new Appointment(dto.getDate(), clinicalHistory, specialty);
+        // TODO populate the clinical history ad the specialty on the service;
+        return new Appointment(dto.getDate(), null, null);
     }
 }
