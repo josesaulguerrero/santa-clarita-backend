@@ -37,4 +37,9 @@ public class SpecialistController {
     public DetailedSpecialistDTO post(@RequestBody CreateSpecialistDTO dto) {
         return this.service.create(dto);
     }
+
+    @DeleteMapping("{id}")
+    public DetailedSpecialistDTO delete(@PathVariable("id") Long id) {
+        return this.service.delete(id);
+    }
 }
