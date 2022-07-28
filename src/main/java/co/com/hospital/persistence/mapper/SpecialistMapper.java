@@ -3,6 +3,7 @@ package co.com.hospital.persistence.mapper;
 import co.com.hospital.domain.dto.specialist.CreateSpecialistDTO;
 import co.com.hospital.domain.dto.specialist.DetailedSpecialistDTO;
 import co.com.hospital.domain.dto.specialist.PartialSpecialistDTO;
+import co.com.hospital.domain.dto.specialty.DetailedSpecialtyDTO;
 import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
 
@@ -44,6 +45,16 @@ public class SpecialistMapper {
                 .stream()
                 .map(this::entityToDetailedDTO)
                 .toList();
+    }
+
+    public Specialist detailedDTOToEntity(DetailedSpecialistDTO dto) {
+        return new Specialist(
+                dto.getDni(),
+                dto.getFullName(),
+                dto.getAge(),
+                dto.isAvailable(),
+                null
+        );
     }
 
     public Specialist createDTOToEntity(CreateSpecialistDTO dto) {
