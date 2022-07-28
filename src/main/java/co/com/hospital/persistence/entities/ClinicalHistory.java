@@ -30,4 +30,8 @@ public class ClinicalHistory {
         this.appointments = appointments;
         this.associatedPatient = associatedPatient;
     }
+
+    public void addAppointment(Appointment appointment) {
+        this.appointments.add(appointment);
+    }
 }
