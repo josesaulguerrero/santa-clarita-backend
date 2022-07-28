@@ -27,6 +27,11 @@ public class AppointmentService {
         return this.mapper.entitiesToPartialDTOs(appointments);
     }
 
+    public List<PartialAppointmentDTO> findAllByDepartmentId(Long specialtyId) {
+        List<Appointment> appointments = this.repository.findAllBySpecialtyInChargeId(specialtyId);
+        return this.mapper.entitiesToPartialDTOs(appointments);
+    }
+
     public DetailedAppointmentDTO findById(Long id) {
         Appointment entity = this.repository
                 .findById(id)
