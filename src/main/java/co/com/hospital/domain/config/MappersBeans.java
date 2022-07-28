@@ -4,28 +4,34 @@ import co.com.hospital.persistence.mapper.AppointmentMapper;
 import co.com.hospital.persistence.mapper.PatientMapper;
 import co.com.hospital.persistence.mapper.SpecialistMapper;
 import co.com.hospital.persistence.mapper.SpecialtyMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 @Configuration
 public class MappersBeans {
     @Bean
+    @Order(-1)
     public AppointmentMapper getAppointmentMapperBean() {
         return new AppointmentMapper();
     }
 
     @Bean
-    public PatientMapper getPatientMapperBean() {
-        return new PatientMapper();
-    }
-
-    @Bean
+    @Order(-1)
     public SpecialistMapper getSpecialistMapperBean() {
         return new SpecialistMapper();
     }
 
     @Bean
-    public SpecialtyMapper getSpecialtyMapperBean() {
-        return new SpecialtyMapper();
+    @Autowired
+    public PatientMapper getPatientMapperBean(AppointmentMapper appointmentMapper) {
+        return new PatientMapper(appointmentMapper);
+    }
+
+    @Bean
+    @Autowired
+    public SpecialtyMapper getSpecialtyMapperBean(SpecialistMapper specialistMapper) {
+        return new SpecialtyMapper(specialistMapper);
     }
 }

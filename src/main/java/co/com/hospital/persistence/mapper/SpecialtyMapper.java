@@ -7,11 +7,9 @@ import co.com.hospital.domain.dto.specialty.PartialSpecialtyDTO;
 import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
 public class SpecialtyMapper {
     private SpecialistMapper specialistMapper;

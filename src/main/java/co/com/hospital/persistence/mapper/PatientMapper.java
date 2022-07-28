@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @AllArgsConstructor
-@NoArgsConstructor
 public class PatientMapper {
+
     private AppointmentMapper appointmentMapper;
 
     public PartialPatientDTO entityToPartialDTO(Patient entity) {

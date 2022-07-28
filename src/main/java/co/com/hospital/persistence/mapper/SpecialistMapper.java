@@ -3,12 +3,10 @@ package co.com.hospital.persistence.mapper;
 import co.com.hospital.domain.dto.specialist.CreateSpecialistDTO;
 import co.com.hospital.domain.dto.specialist.DetailedSpecialistDTO;
 import co.com.hospital.domain.dto.specialist.PartialSpecialistDTO;
-import co.com.hospital.domain.dto.specialty.DetailedSpecialtyDTO;
 import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SpecialistMapper {
     public PartialSpecialistDTO entityToPartialDTO(Specialist entity) {
