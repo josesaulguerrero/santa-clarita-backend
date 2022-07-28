@@ -1,16 +1,17 @@
 package co.com.hospital.persistence.mapper;
 
-import co.com.hospital.domain.dto.appointment.PartialAppointmentDTO;
 import co.com.hospital.domain.dto.specialist.PartialSpecialistDTO;
 import co.com.hospital.domain.dto.specialty.CreateAndUpdateSpecialtyDTO;
 import co.com.hospital.domain.dto.specialty.DetailedSpecialtyDTO;
 import co.com.hospital.domain.dto.specialty.PartialSpecialtyDTO;
 import co.com.hospital.persistence.entities.Specialty;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
 @AllArgsConstructor
 public class SpecialtyMapper {
     private SpecialistMapper specialistMapper;
