@@ -7,8 +7,14 @@ import java.lang.reflect.Constructor;
 public class HttpExceptionBuilder extends RuntimeExceptionBuilder {
     private HttpStatus statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 
-    public <K extends RuntimeException> HttpExceptionBuilder(Class<K> exceptionClass) {
-        super(exceptionClass);
+    public <K extends RuntimeException> HttpExceptionBuilder() {
+        super(HttpException.class);
+    }
+
+    @Override
+    public HttpExceptionBuilder developerMessage(String message) {
+        this.developerMessage = message;
+        return this;
     }
 
     public HttpExceptionBuilder statusCode(HttpStatus statusCode) {
@@ -17,7 +23,7 @@ public class HttpExceptionBuilder extends RuntimeExceptionBuilder {
     }
 
     @Override
-    public RuntimeException build() {
+    public HttpException build() {
         return this.getExceptionInstance(HttpException.class);
     }
 
