@@ -20,9 +20,14 @@ public class AppointmentController {
         return this.service.findAll();
     }
 
-    @GetMapping
-    public List<PartialAppointmentDTO> getAllBySpecialtyId(Long specialtyId) {
+    @GetMapping("specialty/{specialtyId}")
+    public List<PartialAppointmentDTO> getAllBySpecialtyId(@PathVariable("specialtyId") Long specialtyId) {
         return this.service.findAllBySpecialtyId(specialtyId);
+    }
+
+    @GetMapping("patient/{patientId}")
+    public List<PartialAppointmentDTO> getAllByPatientId(@PathVariable("patientId") Long patientId) {
+        return this.service.findAllByPatientId(patientId);
     }
 
     @GetMapping("{id}")
