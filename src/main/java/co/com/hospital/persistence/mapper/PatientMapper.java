@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -53,6 +52,11 @@ public class PatientMapper {
     }
 
     public Patient createDTOToEntity(CreatePatientDTO dto) {
-        return new Patient(dto.getDni(), dto.getFullName(), dto.getAge(), null);
+        return new Patient(
+                dto.getDni(),
+                dto.getFullName(),
+                dto.getAge(),
+                null // clinical history is assigned on the service
+        );
     }
 }

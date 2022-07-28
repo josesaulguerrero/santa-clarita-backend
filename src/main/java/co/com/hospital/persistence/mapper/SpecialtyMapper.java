@@ -4,6 +4,7 @@ import co.com.hospital.domain.dto.specialist.PartialSpecialistDTO;
 import co.com.hospital.domain.dto.specialty.CreateAndUpdateSpecialtyDTO;
 import co.com.hospital.domain.dto.specialty.DetailedSpecialtyDTO;
 import co.com.hospital.domain.dto.specialty.PartialSpecialtyDTO;
+import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -50,7 +51,7 @@ public class SpecialtyMapper {
     public Specialty createDTOToEntity(CreateAndUpdateSpecialtyDTO dto) {
         return new Specialty(
                 dto.getName(),
-                null
+                new Specialist(dto.getSpecialistId())
         );
     }
 
@@ -58,7 +59,7 @@ public class SpecialtyMapper {
         return new Specialty(
                 dto.getId(),
                 dto.getName(),
-                null
+                new Specialist(dto.getSpecialistId())
         );
     }
 }
