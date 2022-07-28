@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +29,7 @@ public class SpecialtyMapper {
                 .toList();
     }
 
-    public DetailedSpecialtyDTO entitiyToDetailedDTO(Specialty entity) {
+    public DetailedSpecialtyDTO entityToDetailedDTO(Specialty entity) {
         PartialSpecialistDTO specialist = specialistMapper.entityToPartialDTO(
                 entity.getSpecialistInCharge()
         );
@@ -44,7 +43,7 @@ public class SpecialtyMapper {
     public List<DetailedSpecialtyDTO> entitiesToDetailedDTOs(List<Specialty> entities) {
         return entities
                 .stream()
-                .map(this::entitiyToDetailedDTO)
+                .map(this::entityToDetailedDTO)
                 .toList();
     }
 
