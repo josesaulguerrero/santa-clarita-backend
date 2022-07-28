@@ -13,11 +13,9 @@ import java.util.List;
 @ToString(callSuper = true)
 public class DetailedSpecialtyDTO extends PartialSpecialtyDTO {
     private PartialSpecialistDTO specialistInCharge;
-    private List<PartialAppointmentDTO> associatedAppointments;
 
-    public DetailedSpecialtyDTO(Long id, String name, PartialSpecialistDTO specialistInCharge, List<PartialAppointmentDTO> associatedAppointments) {
+    public DetailedSpecialtyDTO(Long id, String name, PartialSpecialistDTO specialistInCharge) {
         super(id, name);
         this.specialistInCharge = specialistInCharge;
-        this.associatedAppointments = associatedAppointments;
     }
 }
