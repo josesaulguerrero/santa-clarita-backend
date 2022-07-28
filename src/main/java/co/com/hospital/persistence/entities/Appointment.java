@@ -29,6 +29,10 @@ public class Appointment {
     @JoinColumn(name = "fk_specialty", insertable = false, updatable = false)
     private Specialty specialtyInCharge;
 
+    public Appointment(Long id) {
+        this.id = id;
+    }
+
     public Appointment(LocalDateTime date, ClinicalHistory associatedClinicalHistory, Specialty specialtyInCharge) {
         this.date = date;
         this.associatedClinicalHistory = associatedClinicalHistory;

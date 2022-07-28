@@ -21,6 +21,10 @@ public class Specialist extends Person {
     @OneToOne(mappedBy = "specialistInCharge")
     private Specialty associatedSpecialty;
 
+    public Specialist(Long id) {
+        this.id = id;
+    }
+
     public Specialist(String DNI, String fullName, Integer age, Boolean isAvailable, Specialty associatedSpecialty) {
         super(DNI, fullName, age);
         this.isAvailable = isAvailable;

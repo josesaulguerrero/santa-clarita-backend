@@ -23,6 +23,10 @@ public class Specialty {
     @JoinColumn(name = "fk_specialist", insertable = false, updatable = false)
     private Specialist specialistInCharge;
 
+    public Specialty(Long id) {
+        this.id = id;
+    }
+
     public Specialty(String name, Specialist specialistInCharge) {
         this.name = name;
         this.specialistInCharge = specialistInCharge;

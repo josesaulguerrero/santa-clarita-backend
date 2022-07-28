@@ -18,6 +18,10 @@ public class Patient extends Person {
     @OneToOne(mappedBy = "associatedPatient", orphanRemoval = true)
     private ClinicalHistory clinicalHistory;
 
+    public Patient(Long id) {
+        this.id = id;
+    }
+
     public Patient(String DNI, String fullName, Integer age, ClinicalHistory clinicalHistory) {
         super(DNI, fullName, age);
         this.clinicalHistory = clinicalHistory;

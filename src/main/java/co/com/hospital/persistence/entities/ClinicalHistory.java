@@ -26,6 +26,10 @@ public class ClinicalHistory {
     @JoinColumn(name = "fk_patient", unique = true, insertable = false, updatable = false)
     private Patient associatedPatient;
 
+    public ClinicalHistory(String id) {
+        this.id = id;
+    }
+
     public ClinicalHistory(List<Appointment> appointments, Patient associatedPatient) {
         this.appointments = appointments;
         this.associatedPatient = associatedPatient;
