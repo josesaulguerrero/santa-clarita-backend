@@ -47,16 +47,6 @@ public class SpecialistMapper {
                 .toList();
     }
 
-    public Specialist detailedDTOToEntity(DetailedSpecialistDTO dto) {
-        return new Specialist(
-                dto.getDni(),
-                dto.getFullName(),
-                dto.getAge(),
-                dto.isAvailable(),
-                null
-        );
-    }
-
     public Specialist createDTOToEntity(CreateSpecialistDTO dto) {
         return new Specialist(
                 dto.getDni(),

@@ -56,18 +56,18 @@ public class SpecialistService {
         return this.mapper.entityToDetailedDTO(savedEntity);
     }
 
-    private DetailedSpecialistDTO update(Specialist specialist) {
-        Specialist savedEntity = this.repository.save(specialist);
-        return this.mapper.entityToDetailedDTO(savedEntity);
+    private void update(Specialist specialist) {
+        this.repository.save(specialist);
     }
 
-    public DetailedSpecialistDTO assignToSpeciality(Long specialistId, Specialty specialty) {
+    public Specialist assignToSpeciality(Long specialistId, Specialty specialty) {
         Specialist specialist = this.repository
                 .findById(specialistId)
                 .orElseThrow(this.getNotFoundExceptionSupplier());
         specialist.setAssociatedSpecialty(specialty);
         specialist.setIsAvailable(false);
-        return this.update(specialist);
+        this.update(specialist);
+        return specialist;
     }
 
     public void unassignSpecialty(Long specialistId) {
