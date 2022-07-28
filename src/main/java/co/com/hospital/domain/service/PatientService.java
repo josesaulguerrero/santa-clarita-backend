@@ -7,6 +7,7 @@ import co.com.hospital.persistence.entities.ClinicalHistory;
 import co.com.hospital.persistence.entities.Patient;
 import co.com.hospital.persistence.mapper.PatientMapper;
 import co.com.hospital.persistence.repository.PatientRepository;
+import co.com.hospital.utils.HttpExceptionBuilder;
 import co.com.hospital.utils.RuntimeExceptionBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class PatientService {
         Patient entity = this.repository
                 .findById(id)
                 .orElseThrow(
-                        () -> new RuntimeExceptionBuilder(IllegalArgumentException.class)
+                        () -> new HttpExceptionBuilder()
                                 .developerMessage("The given id does not belong to any Patient.")
                                 .build()
                 );
