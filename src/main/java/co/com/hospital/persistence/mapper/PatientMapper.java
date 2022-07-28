@@ -53,7 +53,6 @@ public class PatientMapper {
     }
 
     public Patient createDTOToEntity(CreatePatientDTO dto) {
-        // TODO populate the entity clinical hisotry on the service.
         return new Patient(dto.getDni(), dto.getFullName(), dto.getAge(), null);
     }
 }
