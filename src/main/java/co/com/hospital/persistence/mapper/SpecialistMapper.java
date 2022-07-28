@@ -52,7 +52,7 @@ public class SpecialistMapper {
                 dto.getFullName(),
                 dto.getAge(),
                 true, // specialists are avaialable by default when they are created.
-                null //TODO assign specialty if necessary on the service.
+                null // assign specialty if necessary on the service.
         );
     }
 }
