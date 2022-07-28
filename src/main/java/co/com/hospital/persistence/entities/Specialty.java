@@ -20,15 +20,11 @@ public class Specialty {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "fk_specialist", unique = true, insertable = false, updatable = false)
+    @JoinColumn(name = "fk_specialist", insertable = false, updatable = false)
     private Specialist specialistInCharge;
 
-    @OneToMany(mappedBy = "specialtyInCharge")
-    private List<Appointment> associatedAppointments;
-
-    public Specialty(String name, Specialist specialistInCharge, List<Appointment> associatedAppointments) {
+    public Specialty(String name, Specialist specialistInCharge) {
         this.name = name;
         this.specialistInCharge = specialistInCharge;
-        this.associatedAppointments = associatedAppointments;
     }
 }
