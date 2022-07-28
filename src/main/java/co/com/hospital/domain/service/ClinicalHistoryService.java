@@ -37,6 +37,10 @@ public class ClinicalHistoryService {
                 );
     }
 
+    public Boolean exists(String id) {
+        return this.repository.existsById(id);
+    }
+
     public ClinicalHistory create(Patient patient, List<Appointment> appointments) {
         ClinicalHistory entity = new ClinicalHistory(appointments, patient);
         return this.repository.save(entity);

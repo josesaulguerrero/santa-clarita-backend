@@ -44,6 +44,10 @@ public class SpecialtyService {
         return this.mapper.entityToDetailedDTO(entity);
     }
 
+    public Boolean exists(Long id) {
+        return this.repository.existsById(id);
+    }
+
     public DetailedSpecialtyDTO create(CreateAndUpdateSpecialtyDTO dto) {
         dto.isValidCreationDTO(); // validates dto attributes.
         Specialty entityFromDTO = this.mapper.createDTOToEntity(dto);

@@ -8,8 +8,10 @@ import co.com.hospital.persistence.entities.ClinicalHistory;
 import co.com.hospital.persistence.entities.Specialty;
 import co.com.hospital.persistence.mapper.AppointmentMapper;
 import co.com.hospital.persistence.repository.AppointmentRepository;
+import co.com.hospital.utils.HttpExceptionBuilder;
 import co.com.hospital.utils.RuntimeExceptionBuilder;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,6 +23,8 @@ import java.util.List;
 public class AppointmentService {
     private final AppointmentRepository repository;
     private final AppointmentMapper mapper;
+    private final SpecialtyService specialtyService;
+    private final ClinicalHistoryService clinicalHistoryService;
 
     public List<PartialAppointmentDTO> findAll() {
         List<Appointment> appointments = this.repository.findAll();
@@ -45,9 +49,15 @@ public class AppointmentService {
 
     public DetailedAppointmentDTO create(CreateAppointmentDTO dto) {
         Appointment entityFromDTO = this.mapper.createDTOToEntity(dto);
-        //TODO the dto brings the ids of the clinical history and specialty, so we gotta retrieve them from their corresponding services.
-        ClinicalHistory associatedClinicalHistory = null;
-        Specialty asssociatedSpecialty = null;
+        if (!this.clinicalHistoryService.exists(dto.getClinicalHistoryId()) || !this.specialtyService.exists(dto.getSpecialtyId())) {
+            throw new HttpExceptionBuilder()
+                    .developerMessage("The given Clinical History Id or Specialty Id do not belong to any of the entities in the database.")
+                    .statusCode(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
+        ClinicalHistory associatedClinicalHistory = entityFromDTO.getAssociatedClinicalHistory();
+        Specialty asssociatedSpecialty = entityFromDTO.getSpecialtyInCharge();
+        // TODO create add appointment on Clinical History service?
         entityFromDTO.setAssociatedClinicalHistory(associatedClinicalHistory);
         entityFromDTO.setSpecialtyInCharge(asssociatedSpecialty);
         Appointment savedEntity = this.repository.save(entityFromDTO);

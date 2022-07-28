@@ -7,11 +7,8 @@ import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
 import co.com.hospital.persistence.mapper.SpecialistMapper;
 import co.com.hospital.persistence.repository.SpecialistRepository;
-import co.com.hospital.utils.HttpException;
 import co.com.hospital.utils.HttpExceptionBuilder;
-import co.com.hospital.utils.RuntimeExceptionBuilder;
 import lombok.AllArgsConstructor;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
