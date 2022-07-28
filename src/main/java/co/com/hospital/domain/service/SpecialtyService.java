@@ -56,7 +56,7 @@ public class SpecialtyService {
     }
 
     public DetailedSpecialtyDTO update(CreateAndUpdateSpecialtyDTO dto) {
-
+        
     }
 
     public DetailedSpecialtyDTO assignSpecialist() {
