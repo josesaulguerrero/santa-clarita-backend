@@ -36,7 +36,7 @@ public class SpecialistMapper {
                 entity.getFullName(),
                 entity.getAge(),
                 entity.getIsAvailable(),
-                specialtyId //TODO Validate specialtyId isn't null.
+                specialtyId
         );
     }
 

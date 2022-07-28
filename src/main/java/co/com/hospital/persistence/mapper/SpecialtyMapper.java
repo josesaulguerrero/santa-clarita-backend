@@ -50,7 +50,7 @@ public class SpecialtyMapper {
     public Specialty createDTOToEntity(CreateAndUpdateSpecialtyDTO dto) {
         return new Specialty(
                 dto.getName(),
-                null //TODO assing specialist in charge on the service.
+                null
         );
     }
 
@@ -58,7 +58,7 @@ public class SpecialtyMapper {
         return new Specialty(
                 dto.getId(),
                 dto.getName(),
-                null //TODO assing specialist in charge on the service.
+                null
         );
     }
 }
