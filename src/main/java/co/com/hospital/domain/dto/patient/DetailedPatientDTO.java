@@ -15,7 +15,5 @@ public class DetailedPatientDTO extends PartialPatientDTO {
         super(id, dni, fullName, age);
         this.takenAppointments = takenAppointments;
     }
-
-    //TODO FieldDTO to validate updatable fields?
 }
 
