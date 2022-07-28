@@ -55,12 +55,13 @@ public class AppointmentService {
                     .statusCode(HttpStatus.BAD_REQUEST)
                     .build();
         }
-        ClinicalHistory associatedClinicalHistory = entityFromDTO.getAssociatedClinicalHistory();
-        Specialty asssociatedSpecialty = entityFromDTO.getSpecialtyInCharge();
-        // TODO create add appointment on Clinical History service?
-        entityFromDTO.setAssociatedClinicalHistory(associatedClinicalHistory);
-        entityFromDTO.setSpecialtyInCharge(asssociatedSpecialty);
         Appointment savedEntity = this.repository.save(entityFromDTO);
+        ClinicalHistory associatedClinicalHistory = this.clinicalHistoryService.addAppointmentRecord(
+                dto.getClinicalHistoryId(), savedEntity
+        );
+        Specialty asssociatedSpecialty = entityFromDTO.getSpecialtyInCharge();
+        savedEntity.setAssociatedClinicalHistory(associatedClinicalHistory);
+        savedEntity.setSpecialtyInCharge(asssociatedSpecialty);
         return this.mapper.entityToDetailedDTO(savedEntity);
     }
 
