@@ -32,6 +32,10 @@ public class AppointmentService {
         return this.mapper.entitiesToPartialDTOs(appointments);
     }
 
+    public Long getCountBySpecialtyId(Long specialtyId) {
+        return this.repository.countBySpecialtyInChargeId(specialtyId);
+    }
+
     public DetailedAppointmentDTO findById(Long id) {
         Appointment entity = this.repository
                 .findById(id)

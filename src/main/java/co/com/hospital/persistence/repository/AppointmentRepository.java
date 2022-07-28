@@ -11,4 +11,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
             "select appointment from Appointment appointment where appointment.specialtyInCharge.id = ?1"
     )
     List<Appointment> findAllBySpecialtyInChargeId(Long id);
+
+    Long countBySpecialtyInChargeId(Long id);
 }
