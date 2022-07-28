@@ -8,7 +8,6 @@ import co.com.hospital.persistence.entities.Appointment;
 import co.com.hospital.persistence.entities.Specialty;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AppointmentMapper {
     public PartialAppointmentDTO entityToPartialDTO(Appointment appointment) {
@@ -19,7 +18,7 @@ public class AppointmentMapper {
         return appointments
                 .stream()
                 .map(this::entityToPartialDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public DetailedAppointmentDTO entityToDetailedDTO(Appointment appointment) {
@@ -35,11 +34,10 @@ public class AppointmentMapper {
         return appointments
                 .stream()
                 .map(this::entityToDetailedDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Appointment createDTOToEntity(CreateAppointmentDTO dto) {
-        // TODO populate the clinical history ad the specialty on the service;
         return new Appointment(dto.getDate(), null, null);
     }
 }

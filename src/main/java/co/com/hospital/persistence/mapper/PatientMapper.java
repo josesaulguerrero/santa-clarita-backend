@@ -29,7 +29,7 @@ public class PatientMapper {
         return entities
                 .stream()
                 .map(this::entityToPartialDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public DetailedPatientDTO entityToDetailedDTO(Patient entity) {
@@ -49,7 +49,7 @@ public class PatientMapper {
         return entities
                 .stream()
                 .map(this::entityToDetailedDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Patient createDTOToEntity(CreatePatientDTO dto) {

@@ -27,7 +27,7 @@ public class SpecialtyMapper {
         return entities
                 .stream()
                 .map(this::entityToPartialDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public DetailedSpecialtyDTO entitiyToDetailedDTO(Specialty entity) {
@@ -45,7 +45,7 @@ public class SpecialtyMapper {
         return entities
                 .stream()
                 .map(this::entitiyToDetailedDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Specialty createDTOToEntity(CreateAndUpdateSpecialtyDTO dto) {
