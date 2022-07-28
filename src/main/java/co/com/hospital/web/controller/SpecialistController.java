@@ -25,6 +25,7 @@ public class SpecialistController {
 
     @GetMapping("available")
     public List<PartialSpecialistDTO> getAllAvailable() {
+        return this.service.findAvaliable();
     }
 
     @GetMapping("{id}")
