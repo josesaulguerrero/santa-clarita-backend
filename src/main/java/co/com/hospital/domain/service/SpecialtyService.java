@@ -23,7 +23,6 @@ public class SpecialtyService {
     private final SpecialtyRepository repository;
     private final SpecialtyMapper mapper;
     private final SpecialistService specialistService;
-    private final AppointmentService appointmentService;
 
 
     public List<PartialSpecialtyDTO> findAll() {
@@ -79,7 +78,7 @@ public class SpecialtyService {
         Specialty specialty = this.repository
                 .findById(id)
                 .orElseThrow(this.getNotFoundExceptionSupplier());
-        Long associatedAppointmentsCount = this.appointmentService.getCountBySpecialtyId(specialty.getId());
+        Long associatedAppointmentsCount = this.repository.countAssociatedAppointments(specialty.getId());
         if(associatedAppointmentsCount > 0) {
             throw new HttpExceptionBuilder()
                     .developerMessage("This specialty has associated appointments; You cannot delete it.")
