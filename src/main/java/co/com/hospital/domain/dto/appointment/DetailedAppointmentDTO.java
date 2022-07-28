@@ -8,6 +8,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 public class DetailedAppointmentDTO extends PartialAppointmentDTO {
-    // TODO add the specialty partial DTO.
-    // TODO add all-args constructor that calls super().
+    //TODO add the specialty partial DTO.
+    //TODO add all-args constructor that calls super().
 }
