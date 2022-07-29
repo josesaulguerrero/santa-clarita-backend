@@ -53,8 +53,8 @@ public class SpecialistService {
         return this.mapper.entityToDetailedDTO(savedEntity);
     }
 
-    private void update(Specialist specialist) {
-        this.repository.save(specialist);
+    private Specialist update(Specialist specialist) {
+        return this.repository.save(specialist);
     }
 
     public Specialist assignToSpeciality(Long specialistId, Specialty specialty) {
@@ -63,11 +63,10 @@ public class SpecialistService {
                 .orElseThrow(this.getNotFoundExceptionSupplier());
         specialist.setAssociatedSpecialty(specialty);
         specialist.setIsAvailable(false);
-        this.update(specialist);
-        return specialist;
+        return this.update(specialist);
     }
 
-    public void unassignSpecialty(Long specialistId) {
+    public void unassignFromSpecialty(Long specialistId) {
         Specialist specialist = this.repository
                 .findById(specialistId)
                 .orElseThrow(this.getNotFoundExceptionSupplier());

@@ -71,8 +71,12 @@ public class SpecialtyService {
         Specialty specialty = this.repository
                 .findById(dto.getId())
                 .orElseThrow(this.getNotFoundExceptionSupplier());
-        this.specialistService.unassignSpecialty(dto.getSpecialistId());
-        Specialist specialist = this.specialistService.assignToSpeciality(dto.getSpecialistId(), specialty);
+        Long previousSpecialistId = specialty.getSpecialistInCharge().getId();
+        this.specialistService.unassignFromSpecialty(previousSpecialistId);
+
+        Specialist specialist = this.specialistService.assignToSpeciality(
+                dto.getSpecialistId(), specialty
+        );
         specialty.setSpecialistInCharge(specialist);
         Specialty updatedEntity = this.repository.save(specialty);
         return this.mapper.entityToDetailedDTO(updatedEntity);

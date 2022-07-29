@@ -38,7 +38,7 @@ public class SpecialtyController {
         return this.service.update(dto);
     }
 
-    @PutMapping("{id}/specialist")
+    @PutMapping("specialist")
     public DetailedSpecialtyDTO assignNewSpecialist(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
         return this.service.assignSpecialist(dto);
     }

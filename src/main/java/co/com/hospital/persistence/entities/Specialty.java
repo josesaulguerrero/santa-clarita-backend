@@ -19,7 +19,7 @@ public class Specialty {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "fk_specialist", insertable = false, updatable = false)
+    @JoinColumn(name = "fk_specialist", insertable = false)
     private Specialist specialistInCharge;
 
     public Specialty(Long id) {
