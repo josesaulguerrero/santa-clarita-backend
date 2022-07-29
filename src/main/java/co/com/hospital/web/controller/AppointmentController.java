@@ -4,7 +4,6 @@ import co.com.hospital.domain.dto.appointment.CreateAppointmentDTO;
 import co.com.hospital.domain.dto.appointment.DetailedAppointmentDTO;
 import co.com.hospital.domain.dto.appointment.PartialAppointmentDTO;
 import co.com.hospital.domain.service.AppointmentService;
-import co.com.hospital.utils.HttpException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,55 +19,31 @@ public class AppointmentController {
 
     @GetMapping
     public ResponseEntity<List<PartialAppointmentDTO>> getAll() {
-        try {
-            return new ResponseEntity<>(this.service.findAll(), HttpStatus.OK);
-        } catch (HttpException e) {
-            return new ResponseEntity<>(e.getStatusCode());
-        }
+        return new ResponseEntity<>(this.service.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("specialty/{specialtyId}")
     public ResponseEntity<List<PartialAppointmentDTO>> getAllBySpecialtyId(@PathVariable("specialtyId") Long specialtyId) {
-        try {
-            return new ResponseEntity<>(this.service.findAllBySpecialtyId(specialtyId), HttpStatus.OK);
-        } catch (HttpException e) {
-            return new ResponseEntity<>(e.getStatusCode());
-        }
+        return new ResponseEntity<>(this.service.findAllBySpecialtyId(specialtyId), HttpStatus.OK);
     }
 
     @GetMapping("patient/{patientId}")
     public ResponseEntity<List<PartialAppointmentDTO>> getAllByPatientId(@PathVariable("patientId") Long patientId) {
-        try {
-            return new ResponseEntity<>(this.service.findAllByPatientId(patientId), HttpStatus.OK);
-        } catch (HttpException e) {
-            return new ResponseEntity<>(e.getStatusCode());
-        }
+        return new ResponseEntity<>(this.service.findAllByPatientId(patientId), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<DetailedAppointmentDTO> getById(@PathVariable("id") Long id) {
-        try {
-            return new ResponseEntity<>(this.service.findById(id), HttpStatus.OK);
-        } catch (HttpException e) {
-            return new ResponseEntity<>(e.getStatusCode());
-        }
+        return new ResponseEntity<>(this.service.findById(id), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<DetailedAppointmentDTO> post(@RequestBody CreateAppointmentDTO dto) {
-        try {
-            return new ResponseEntity<>(this.service.create(dto), HttpStatus.CREATED);
-        } catch (HttpException e) {
-            return new ResponseEntity<>(e.getStatusCode());
-        }
+        return new ResponseEntity<>(this.service.create(dto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<DetailedAppointmentDTO> delete(@PathVariable("id") Long id) {
-        try {
-            return new ResponseEntity<>(this.service.delete(id), HttpStatus.OK);
-        } catch (HttpException e) {
-            return new ResponseEntity<>(e.getStatusCode());
-        }
+        return new ResponseEntity<>(this.service.delete(id), HttpStatus.OK);
     }
 }
