@@ -1,13 +1,13 @@
 package co.com.hospital.web.controller;
 
-import co.com.hospital.domain.dto.specialist.CreateSpecialistDTO;
-import co.com.hospital.domain.dto.specialist.DetailedSpecialistDTO;
-import co.com.hospital.domain.dto.specialist.PartialSpecialistDTO;
 import co.com.hospital.domain.dto.specialty.CreateAndUpdateSpecialtyDTO;
 import co.com.hospital.domain.dto.specialty.DetailedSpecialtyDTO;
 import co.com.hospital.domain.dto.specialty.PartialSpecialtyDTO;
 import co.com.hospital.domain.service.SpecialtyService;
+import co.com.hospital.utils.HttpException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,32 +19,56 @@ public class SpecialtyController {
     private final SpecialtyService service;
 
     @GetMapping
-    public List<PartialSpecialtyDTO> getAll() {
-        return this.service.findAll();
+    public ResponseEntity<List<PartialSpecialtyDTO>> getAll() {
+        try {
+            return new ResponseEntity<>(this.service.findAll(), HttpStatus.OK);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @GetMapping("{id}")
-    public DetailedSpecialtyDTO getById(@PathVariable("id") Long id) {
-        return this.service.findById(id);
+    public ResponseEntity<DetailedSpecialtyDTO> getById(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(this.service.findById(id), HttpStatus.OK);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @PostMapping
-    public DetailedSpecialtyDTO post(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
-        return this.service.create(dto);
+    public ResponseEntity<DetailedSpecialtyDTO> post(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
+        try {
+            return new ResponseEntity<>(this.service.create(dto), HttpStatus.CREATED);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @PutMapping
-    public DetailedSpecialtyDTO update(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
-        return this.service.update(dto);
+    public ResponseEntity<DetailedSpecialtyDTO> update(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
+        try {
+            return new ResponseEntity<>(this.service.update(dto), HttpStatus.ACCEPTED);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @PutMapping("specialist")
-    public DetailedSpecialtyDTO assignNewSpecialist(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
-        return this.service.assignSpecialist(dto);
+    public ResponseEntity<DetailedSpecialtyDTO> assignNewSpecialist(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
+        try {
+            return new ResponseEntity<>(this.service.assignSpecialist(dto), HttpStatus.ACCEPTED);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @DeleteMapping("{id}")
-    public DetailedSpecialtyDTO delete(@PathVariable("id") Long id) {
-        return this.service.delete(id);
+    public ResponseEntity<DetailedSpecialtyDTO> delete(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(this.service.delete(id), HttpStatus.ACCEPTED);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 }
