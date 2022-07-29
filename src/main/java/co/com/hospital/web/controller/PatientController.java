@@ -4,7 +4,10 @@ import co.com.hospital.domain.dto.patient.CreatePatientDTO;
 import co.com.hospital.domain.dto.patient.DetailedPatientDTO;
 import co.com.hospital.domain.dto.patient.PartialPatientDTO;
 import co.com.hospital.domain.service.PatientService;
+import co.com.hospital.utils.HttpException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,17 +19,29 @@ public class PatientController {
     private final PatientService service;
 
     @GetMapping
-    public List<PartialPatientDTO> getAll() {
-        return this.service.findAll();
+    public ResponseEntity<List<PartialPatientDTO>> getAll() {
+        try {
+            return new ResponseEntity<>(this.service.findAll(), HttpStatus.OK);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @GetMapping("{id}")
-    public DetailedPatientDTO getById(@PathVariable("id") Long id) {
-        return this.service.findById(id);
+    public ResponseEntity<DetailedPatientDTO> getById(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(this.service.findById(id), HttpStatus.OK);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @PostMapping
-    public DetailedPatientDTO post(@RequestBody CreatePatientDTO dto) {
-        return this.service.create(dto);
+    public ResponseEntity<DetailedPatientDTO> post(@RequestBody CreatePatientDTO dto) {
+        try {
+            return new ResponseEntity<>(this.service.create(dto), HttpStatus.CREATED);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 }
