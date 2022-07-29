@@ -29,11 +29,11 @@ public class PatientController {
 
     @GetMapping("{id}")
     public ResponseEntity<DetailedPatientDTO> getById(@PathVariable("id") Long id) {
-        try {
-            return new ResponseEntity<>(this.service.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.service.findById(id), HttpStatus.OK);
+        /*try {
         } catch (HttpException e) {
             return new ResponseEntity<>(e.getStatusCode());
-        }
+        }*/
     }
 
     @PostMapping
