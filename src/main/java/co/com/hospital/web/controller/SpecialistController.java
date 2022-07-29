@@ -7,7 +7,10 @@ import co.com.hospital.domain.dto.specialist.CreateSpecialistDTO;
 import co.com.hospital.domain.dto.specialist.DetailedSpecialistDTO;
 import co.com.hospital.domain.dto.specialist.PartialSpecialistDTO;
 import co.com.hospital.domain.service.SpecialistService;
+import co.com.hospital.utils.HttpException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,27 +22,47 @@ public class SpecialistController {
     private final SpecialistService service;
 
     @GetMapping
-    public List<PartialSpecialistDTO> getAll() {
-        return this.service.findAll();
+    public ResponseEntity<List<PartialSpecialistDTO>> getAll() {
+        try {
+            return new ResponseEntity<>(this.service.findAll(), HttpStatus.OK);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @GetMapping("available")
-    public List<PartialSpecialistDTO> getAllAvailable() {
-        return this.service.findAvaliable();
+    public ResponseEntity<List<PartialSpecialistDTO>> getAllAvailable() {
+        try {
+            return new ResponseEntity<>(this.service.findAvaliable(), HttpStatus.OK);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @GetMapping("{id}")
-    public DetailedSpecialistDTO getById(@PathVariable("id") Long id) {
-        return this.service.findById(id);
+    public ResponseEntity<DetailedSpecialistDTO> getById(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(this.service.findById(id), HttpStatus.OK);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @PostMapping
-    public DetailedSpecialistDTO post(@RequestBody CreateSpecialistDTO dto) {
-        return this.service.create(dto);
+    public ResponseEntity<DetailedSpecialistDTO> post(@RequestBody CreateSpecialistDTO dto) {
+        try {
+            return new ResponseEntity<>(this.service.create(dto), HttpStatus.CREATED);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
     @DeleteMapping("{id}")
-    public DetailedSpecialistDTO delete(@PathVariable("id") Long id) {
-        return this.service.delete(id);
+    public ResponseEntity<DetailedSpecialistDTO> delete(@PathVariable("id") Long id) {
+        try {
+            return new ResponseEntity<>(this.service.delete(id), HttpStatus.OK);
+        } catch (HttpException e) {
+            return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 }

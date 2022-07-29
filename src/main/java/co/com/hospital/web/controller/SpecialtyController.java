@@ -66,7 +66,7 @@ public class SpecialtyController {
     @DeleteMapping("{id}")
     public ResponseEntity<DetailedSpecialtyDTO> delete(@PathVariable("id") Long id) {
         try {
-            return new ResponseEntity<>(this.service.delete(id), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(this.service.delete(id), HttpStatus.OK);
         } catch (HttpException e) {
             return new ResponseEntity<>(e.getStatusCode());
         }
