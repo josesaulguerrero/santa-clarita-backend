@@ -83,6 +83,12 @@ public class SpecialistService {
 
     public DetailedSpecialistDTO delete(Long id) {
         DetailedSpecialistDTO dto = this.findById(id);
+        if(dto.getSpecialtyId() != null) {
+            throw new HttpExceptionBuilder()
+                    .developerMessage("This specialist is assigned to a specialty; you cannot delete it.")
+                    .statusCode(HttpStatus.LOCKED)
+                    .build();
+        }
         this.repository.deleteById(dto.getId());
         return dto;
     }
