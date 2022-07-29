@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
 public class ClinicalHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +34,14 @@ public class ClinicalHistory {
 
     public void addAppointment(Appointment appointment) {
         this.appointments.add(appointment);
+    }
+
+    @Override
+    public String toString() {
+        return "ClinicalHistory{" +
+                "id=" + id +
+                ", appointments=" + appointments +
+                ", associatedPatient=" + associatedPatient +
+                '}';
     }
 }

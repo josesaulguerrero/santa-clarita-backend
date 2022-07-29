@@ -8,6 +8,7 @@ import co.com.hospital.persistence.entities.Appointment;
 import co.com.hospital.persistence.entities.ClinicalHistory;
 import co.com.hospital.persistence.entities.Specialty;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class AppointmentMapper {
@@ -40,8 +41,8 @@ public class AppointmentMapper {
 
     public Appointment createDTOToEntity(CreateAppointmentDTO dto) {
         return new Appointment(
-                dto.getDate(),
-                new ClinicalHistory(dto.getClinicalHistoryId()),
+                LocalDateTime.now(),
+                null,
                 new Specialty(dto.getSpecialtyId()));
     }
 }

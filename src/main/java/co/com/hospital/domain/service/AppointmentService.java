@@ -3,8 +3,10 @@ package co.com.hospital.domain.service;
 import co.com.hospital.domain.dto.appointment.CreateAppointmentDTO;
 import co.com.hospital.domain.dto.appointment.DetailedAppointmentDTO;
 import co.com.hospital.domain.dto.appointment.PartialAppointmentDTO;
+import co.com.hospital.domain.dto.specialty.DetailedSpecialtyDTO;
 import co.com.hospital.persistence.entities.Appointment;
 import co.com.hospital.persistence.entities.ClinicalHistory;
+import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
 import co.com.hospital.persistence.mapper.AppointmentMapper;
 import co.com.hospital.persistence.repository.AppointmentRepository;
@@ -53,20 +55,24 @@ public class AppointmentService {
     }
 
     public DetailedAppointmentDTO create(CreateAppointmentDTO dto) {
-        Appointment entityFromDTO = this.mapper.createDTOToEntity(dto);
-        if (!this.clinicalHistoryService.exists(dto.getClinicalHistoryId()) || !this.specialtyService.exists(dto.getSpecialtyId())) {
+        if (!this.specialtyService.exists(dto.getSpecialtyId())) {
             throw new HttpExceptionBuilder()
-                    .developerMessage("The given Clinical History Id or Specialty Id do not belong to any of the entities in the database.")
+                    .developerMessage("The given Specialty Id do not belong to any of the entities in the database.")
                     .statusCode(HttpStatus.BAD_REQUEST)
                     .build();
         }
-        Appointment savedEntity = this.repository.save(entityFromDTO);
-        ClinicalHistory associatedClinicalHistory = this.clinicalHistoryService.addAppointmentRecord(
-                dto.getClinicalHistoryId(), savedEntity
+        Appointment entityFromDTO = this.mapper.createDTOToEntity(dto);
+        ClinicalHistory associatedClinicalHistory = this.clinicalHistoryService.findByPatientId(dto.getPatientId());
+        DetailedSpecialtyDTO specialtyDTO = this.specialtyService.findById(dto.getSpecialtyId());
+        Specialty asssociatedSpecialty = new Specialty(
+                specialtyDTO.getId(),
+                specialtyDTO.getName(),
+                new Specialist(specialtyDTO.getSpecialistInCharge().getId())
         );
-        Specialty asssociatedSpecialty = entityFromDTO.getSpecialtyInCharge();
-        savedEntity.setAssociatedClinicalHistory(associatedClinicalHistory);
-        savedEntity.setSpecialtyInCharge(asssociatedSpecialty);
+        entityFromDTO.setAssociatedClinicalHistory(associatedClinicalHistory);
+        entityFromDTO.setSpecialtyInCharge(asssociatedSpecialty);
+        Appointment savedEntity = this.repository.save(entityFromDTO);
+        this.clinicalHistoryService.addAppointmentRecord(associatedClinicalHistory.getId(), savedEntity);
         return this.mapper.entityToDetailedDTO(savedEntity);
     }
 

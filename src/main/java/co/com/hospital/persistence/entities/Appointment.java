@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +21,11 @@ public class Appointment {
     private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "fk_clinical_history", nullable = false, updatable = false, insertable = false)
+    @JoinColumn(name = "fk_clinical_history", insertable = false)
     private ClinicalHistory associatedClinicalHistory;
 
     @ManyToOne
-    @JoinColumn(name = "fk_specialty", insertable = false, updatable = false)
+    @JoinColumn(name = "fk_specialty", insertable = false)
     private Specialty specialtyInCharge;
 
     public Appointment(Long id) {
@@ -37,5 +36,15 @@ public class Appointment {
         this.date = date;
         this.associatedClinicalHistory = associatedClinicalHistory;
         this.specialtyInCharge = specialtyInCharge;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", date=" + date +
+                ", associatedClinicalHistory=" + associatedClinicalHistory +
+                ", specialtyInCharge=" + specialtyInCharge +
+                '}';
     }
 }

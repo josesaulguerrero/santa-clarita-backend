@@ -36,7 +36,6 @@ public class Patient extends Person {
     public String toString() {
         return "Patient{" +
                 "id=" + id +
-                ", clinicalHistory=" + clinicalHistory +
                 '}';
     }
 }
