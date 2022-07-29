@@ -61,6 +61,12 @@ public class SpecialistService {
         Specialist specialist = this.repository
                 .findById(specialistId)
                 .orElseThrow(this.getNotFoundExceptionSupplier());
+        if (specialist.getAssociatedSpecialty() != null) {
+            throw new HttpExceptionBuilder()
+                    .developerMessage("This specialist cannot be reassigned; They already belong to a different specialty and thus they are not available.")
+                    .statusCode(HttpStatus.LOCKED)
+                    .build();
+        }
         specialist.setAssociatedSpecialty(specialty);
         specialist.setIsAvailable(false);
         return this.update(specialist);
