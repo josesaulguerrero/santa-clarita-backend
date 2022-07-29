@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("specialties")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class SpecialtyController {
     private final SpecialtyService service;
 

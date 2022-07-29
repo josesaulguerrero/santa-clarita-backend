@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("specialists")
+@CrossOrigin("*")
 @AllArgsConstructor
 public class SpecialistController {
     private final SpecialistService service;
