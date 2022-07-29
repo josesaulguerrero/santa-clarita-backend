@@ -41,7 +41,6 @@ public class PatientService {
         Patient savedPatient = this.repository.save(patientFromDTO);
         ClinicalHistory clinicalHistory = this.clinicalHistoryService.create();
         this.clinicalHistoryService.assignPatient(clinicalHistory.getId(), savedPatient);
-        //TODO replace lombok's tostring
         return this.mapper.entityToDetailedDTO(savedPatient);
     }
 }

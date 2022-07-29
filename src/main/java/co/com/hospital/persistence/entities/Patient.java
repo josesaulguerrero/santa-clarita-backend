@@ -9,7 +9,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(callSuper = true)
 public class Patient extends Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,5 +30,13 @@ public class Patient extends Person {
         super(DNI, fullName, age);
         this.id = id;
         this.clinicalHistory = clinicalHistory;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", clinicalHistory=" + clinicalHistory +
+                '}';
     }
 }

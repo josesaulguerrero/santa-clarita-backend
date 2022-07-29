@@ -9,7 +9,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(callSuper = true)
 public class Specialist extends Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +35,14 @@ public class Specialist extends Person {
         this.id = id;
         this.isAvailable = isAvailable;
         this.associatedSpecialty = associatedSpecialty;
+    }
+
+    @Override
+    public String toString() {
+        return "Specialist{" +
+                "id=" + id +
+                ", isAvailable=" + isAvailable +
+                ", associatedSpecialty=" + associatedSpecialty +
+                '}';
     }
 }
