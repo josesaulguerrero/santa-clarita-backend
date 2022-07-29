@@ -14,7 +14,7 @@ public class CreateAndUpdateSpecialtyDTO {
     private Long specialistId;
 
     private boolean idIsNull() {
-        return this.getId() != null;
+        return this.getId() == null;
     }
 
     public boolean isValidCreationDTO() {
