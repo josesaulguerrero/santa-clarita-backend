@@ -7,7 +7,7 @@ import java.lang.reflect.Constructor;
 public class HttpExceptionBuilder extends RuntimeExceptionBuilder {
     private HttpStatus statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 
-    public <K extends RuntimeException> HttpExceptionBuilder() {
+    public HttpExceptionBuilder() {
         super(HttpException.class);
     }
 

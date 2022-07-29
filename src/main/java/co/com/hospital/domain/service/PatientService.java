@@ -9,6 +9,7 @@ import co.com.hospital.persistence.mapper.PatientMapper;
 import co.com.hospital.persistence.repository.PatientRepository;
 import co.com.hospital.utils.HttpExceptionBuilder;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,6 +33,7 @@ public class PatientService {
                 .orElseThrow(
                         () -> new HttpExceptionBuilder()
                                 .developerMessage("The given id does not belong to any Patient.")
+                                .statusCode(HttpStatus.NOT_FOUND)
                                 .build()
                 );
         return mapper.entityToDetailedDTO(entity);
