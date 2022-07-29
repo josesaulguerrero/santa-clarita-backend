@@ -8,7 +8,6 @@ import co.com.hospital.persistence.entities.Patient;
 import co.com.hospital.persistence.mapper.PatientMapper;
 import co.com.hospital.persistence.repository.PatientRepository;
 import co.com.hospital.utils.HttpExceptionBuilder;
-import co.com.hospital.utils.RuntimeExceptionBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,11 +37,11 @@ public class PatientService {
         return mapper.entityToDetailedDTO(entity);
     }
     public DetailedPatientDTO create(CreatePatientDTO dto){
-        Patient entityFromDTO = this.mapper.createDTOToEntity(dto);
-        // patients start without a clinical history, so we gotta assign it manually.
-        ClinicalHistory clinicalHistory = this.clinicalHistoryService.create(entityFromDTO);
-        entityFromDTO.setClinicalHistory(clinicalHistory);
-        Patient savedEntity = this.repository.save(entityFromDTO);
-        return this.mapper.entityToDetailedDTO(savedEntity);
+        Patient patientFromDTO = this.mapper.createDTOToEntity(dto);
+        Patient savedPatient = this.repository.save(patientFromDTO);
+        ClinicalHistory clinicalHistory = this.clinicalHistoryService.create();
+        this.clinicalHistoryService.assignPatient(clinicalHistory.getId(), savedPatient);
+        //TODO replace lombok's tostring
+        return this.mapper.entityToDetailedDTO(savedPatient);
     }
 }

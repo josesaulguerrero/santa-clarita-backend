@@ -11,6 +11,6 @@ import java.time.LocalDateTime;
 @Data
 public class CreateAppointmentDTO {
     private LocalDateTime date;
-    private String clinicalHistoryId;
+    private Long clinicalHistoryId;
     private Long specialtyId;
 }

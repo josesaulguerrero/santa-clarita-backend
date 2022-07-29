@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
-public interface ClinicalHistoryRepository extends JpaRepository<ClinicalHistory, String> {
+public interface ClinicalHistoryRepository extends JpaRepository<ClinicalHistory, Long> {
     @Query(
             "select history from ClinicalHistory history where history.associatedPatient.id = ?1"
     )

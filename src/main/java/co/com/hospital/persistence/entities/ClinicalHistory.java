@@ -1,7 +1,6 @@
 package co.com.hospital.persistence.entities;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,18 +14,17 @@ import java.util.List;
 @ToString
 public class ClinicalHistory {
     @Id
-    @GenericGenerator(name = "clinical_history_id_generator", strategy = "uuid2")
-    @GeneratedValue(generator = "clinical_history_id_generator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToMany(mappedBy = "associatedClinicalHistory", fetch = FetchType.EAGER)
     private List<Appointment> appointments;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_patient", unique = true, insertable = false, updatable = false)
+    @JoinColumn(name = "fk_patient", unique = true, insertable = false)
     private Patient associatedPatient;
 
-    public ClinicalHistory(String id) {
+    public ClinicalHistory(Long id) {
         this.id = id;
     }
 
