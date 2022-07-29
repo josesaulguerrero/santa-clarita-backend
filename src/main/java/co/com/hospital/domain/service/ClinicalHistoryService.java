@@ -56,6 +56,7 @@ public class ClinicalHistoryService {
 
     public ClinicalHistory addAppointmentRecord(Long clinicalHistoryId, Appointment appointment) {
         ClinicalHistory entity = this.findById(clinicalHistoryId);
+        appointment.setAssociatedClinicalHistory(entity);
         entity.addAppointment(appointment);
         return this.repository.save(entity);
     }

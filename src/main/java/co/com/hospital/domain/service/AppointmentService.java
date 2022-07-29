@@ -61,19 +61,20 @@ public class AppointmentService {
                     .statusCode(HttpStatus.BAD_REQUEST)
                     .build();
         }
-        Appointment entityFromDTO = this.mapper.createDTOToEntity(dto);
-        ClinicalHistory associatedClinicalHistory = this.clinicalHistoryService.findByPatientId(dto.getPatientId());
+        Appointment appointmentFromDTO = this.mapper.createDTOToEntity(dto);
+        Long clinicalHistoryId = this.clinicalHistoryService
+                .findByPatientId(dto.getPatientId())
+                .getId();
         DetailedSpecialtyDTO specialtyDTO = this.specialtyService.findById(dto.getSpecialtyId());
         Specialty asssociatedSpecialty = new Specialty(
                 specialtyDTO.getId(),
                 specialtyDTO.getName(),
                 new Specialist(specialtyDTO.getSpecialistInCharge().getId())
         );
-        entityFromDTO.setAssociatedClinicalHistory(associatedClinicalHistory);
-        entityFromDTO.setSpecialtyInCharge(asssociatedSpecialty);
-        Appointment savedEntity = this.repository.save(entityFromDTO);
-        this.clinicalHistoryService.addAppointmentRecord(associatedClinicalHistory.getId(), savedEntity);
-        return this.mapper.entityToDetailedDTO(savedEntity);
+        appointmentFromDTO.setSpecialtyInCharge(asssociatedSpecialty);
+        Appointment savedAppointment = this.repository.save(appointmentFromDTO);
+        this.clinicalHistoryService.addAppointmentRecord(clinicalHistoryId, savedAppointment);
+        return this.mapper.entityToDetailedDTO(savedAppointment);
     }
 
     public DetailedAppointmentDTO delete(Long id) {

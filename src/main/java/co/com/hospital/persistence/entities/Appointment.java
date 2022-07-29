@@ -21,7 +21,7 @@ public class Appointment {
     private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "fk_clinical_history", insertable = false)
+    @JoinColumn(name = "fk_clinical_history")
     private ClinicalHistory associatedClinicalHistory;
 
     @ManyToOne
