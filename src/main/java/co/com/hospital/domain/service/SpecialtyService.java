@@ -93,6 +93,7 @@ public class SpecialtyService {
                     .statusCode(HttpStatus.LOCKED)
                     .build();
         }
+        this.specialistService.unassignFromSpecialty(specialty.getSpecialistInCharge().getId());
         this.repository.deleteById(specialty.getId());
         return this.mapper.entityToDetailedDTO(specialty);
     }
