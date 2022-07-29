@@ -13,3 +13,6 @@ and much more.
 - Clone this repository on your local machine (`git clone https://github.com/josesaulguerrero/santa-clarita-backend`).
 - Open IntelliJ or your favorite Java IDE and run the project (this will automatically create the required tables on the database).
 - Open your localhost on 8080 and start interacting with the system. 
+
+### Optional advices
+- You can create your own postman requests, but you can also borrow mine: https://www.getpostman.com/collections/08bdd26e4b5dfeb17547 
