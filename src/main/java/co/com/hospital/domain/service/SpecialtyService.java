@@ -54,6 +54,7 @@ public class SpecialtyService {
         Specialist specialist = this.specialistService.assignToSpeciality(
                 dto.getSpecialistId(), entityFromDTO
         );
+        System.out.println(specialist);
         entityFromDTO.setSpecialistInCharge(specialist);
         Specialty savedEntity = this.repository.save(entityFromDTO);
         return this.mapper.entityToDetailedDTO(savedEntity);

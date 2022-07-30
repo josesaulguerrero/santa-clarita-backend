@@ -10,7 +10,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
 public class Specialty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +17,7 @@ public class Specialty {
 
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "fk_specialist", insertable = false)
+    @OneToOne(mappedBy = "associatedSpecialty")
     private Specialist specialistInCharge;
 
     public Specialty(Long id) {
@@ -29,5 +27,14 @@ public class Specialty {
     public Specialty(String name, Specialist specialistInCharge) {
         this.name = name;
         this.specialistInCharge = specialistInCharge;
+    }
+
+    @Override
+    public String toString() {
+        return "Specialty{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", specialistInCharge=" + specialistInCharge +
+                '}';
     }
 }

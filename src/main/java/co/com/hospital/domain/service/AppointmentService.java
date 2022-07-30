@@ -5,7 +5,6 @@ import co.com.hospital.domain.dto.appointment.DetailedAppointmentDTO;
 import co.com.hospital.domain.dto.appointment.PartialAppointmentDTO;
 import co.com.hospital.domain.dto.specialty.DetailedSpecialtyDTO;
 import co.com.hospital.persistence.entities.Appointment;
-import co.com.hospital.persistence.entities.ClinicalHistory;
 import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
 import co.com.hospital.persistence.mapper.AppointmentMapper;
@@ -66,12 +65,12 @@ public class AppointmentService {
                 .findByPatientId(dto.getPatientId())
                 .getId();
         DetailedSpecialtyDTO specialtyDTO = this.specialtyService.findById(dto.getSpecialtyId());
-        Specialty asssociatedSpecialty = new Specialty(
+        Specialty associatedSpecialty = new Specialty(
                 specialtyDTO.getId(),
                 specialtyDTO.getName(),
                 new Specialist(specialtyDTO.getSpecialistInCharge().getId())
         );
-        appointmentFromDTO.setSpecialtyInCharge(asssociatedSpecialty);
+        appointmentFromDTO.setSpecialtyInCharge(associatedSpecialty);
         Appointment savedAppointment = this.repository.save(appointmentFromDTO);
         this.clinicalHistoryService.addAppointmentRecord(clinicalHistoryId, savedAppointment);
         return this.mapper.entityToDetailedDTO(savedAppointment);

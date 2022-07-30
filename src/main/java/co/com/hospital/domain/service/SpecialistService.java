@@ -67,9 +67,10 @@ public class SpecialistService {
                     .statusCode(HttpStatus.LOCKED)
                     .build();
         }
+        specialty.setSpecialistInCharge(specialist);
         specialist.setAssociatedSpecialty(specialty);
         specialist.setIsAvailable(false);
-        return this.update(specialist);
+        return this.repository.save(specialist);
     }
 
     public void unassignFromSpecialty(Long specialistId) {

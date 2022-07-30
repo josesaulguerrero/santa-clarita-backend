@@ -17,7 +17,8 @@ public class Specialist extends Person {
     @Column(name = "is_available", nullable = false)
     private Boolean isAvailable;
 
-    @OneToOne(mappedBy = "specialistInCharge")
+    @OneToOne
+    @JoinColumn(name = "fk_specialty", insertable = false)
     private Specialty associatedSpecialty;
 
     public Specialist(Long id) {
@@ -42,7 +43,6 @@ public class Specialist extends Person {
         return "Specialist{" +
                 "id=" + id +
                 ", isAvailable=" + isAvailable +
-                ", associatedSpecialty=" + associatedSpecialty +
                 '}';
     }
 }
