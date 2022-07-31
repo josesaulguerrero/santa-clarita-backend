@@ -49,12 +49,9 @@ public class ClinicalHistoryService {
         return this.repository.save(clinicalHistory);
     }
 
-    /*public void assignPatient(Long clinicalHistoryId, Patient patient) {
-    }*/
-
-    public ClinicalHistory addAppointmentRecord(Long clinicalHistoryId, Appointment appointment) {
+    public void addAppointmentRecord(Long clinicalHistoryId, Appointment appointment) {
         ClinicalHistory clinicalHistory = this.findById(clinicalHistoryId);
         clinicalHistory.addAppointment(appointment);
-        return this.repository.save(clinicalHistory);
+        this.repository.save(clinicalHistory);
     }
 }
