@@ -1,9 +1,9 @@
 package co.com.hospital.domain.config;
 
-import co.com.hospital.persistence.mapper.AppointmentMapper;
-import co.com.hospital.persistence.mapper.PatientMapper;
-import co.com.hospital.persistence.mapper.SpecialistMapper;
-import co.com.hospital.persistence.mapper.SpecialtyMapper;
+import co.com.hospital.web.mapper.AppointmentMapper;
+import co.com.hospital.web.mapper.PatientMapper;
+import co.com.hospital.web.mapper.SpecialistMapper;
+import co.com.hospital.web.mapper.SpecialtyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @Transactional
@@ -18,13 +17,6 @@ public class ClinicalHistoryService {
     private final ClinicalHistoryRepository repository;
 
     public ClinicalHistory findById(Long id) {
-        return this.repository
-                .findById(id)
-                .orElseThrow(
-                        () -> new RuntimeExceptionBuilder(IllegalArgumentException.class)
-                            .developerMessage("The given id doesn't belong to any Clinical History.")
-                            .build()
-                );
     }
 
     public ClinicalHistory findByPatientId(Long patientId) {
@@ -42,22 +34,11 @@ public class ClinicalHistoryService {
     }
 
     public ClinicalHistory create() {
-        ClinicalHistory entity = new ClinicalHistory(List.of(), null);
-        return this.repository.save(entity);
     }
 
     public void assignPatient(Long clinicalHistoryId, Patient patient) {
-        ClinicalHistory clinicalHistory = this.findById(clinicalHistoryId);
-        System.out.println("clinicalHistory = " + clinicalHistory);
-        clinicalHistory.setAssociatedPatient(patient);
-        patient.setClinicalHistory(clinicalHistory);
-        this.repository.save(clinicalHistory);
     }
 
     public ClinicalHistory addAppointmentRecord(Long clinicalHistoryId, Appointment appointment) {
-        ClinicalHistory entity = this.findById(clinicalHistoryId);
-        appointment.setAssociatedClinicalHistory(entity);
-        entity.addAppointment(appointment);
-        return this.repository.save(entity);
     }
 }

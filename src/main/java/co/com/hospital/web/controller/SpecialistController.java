@@ -25,7 +25,7 @@ public class SpecialistController {
 
     @GetMapping("available")
     public ResponseEntity<List<PartialSpecialistDTO>> getAllAvailable() {
-        return new ResponseEntity<>(this.service.findAvaliable(), HttpStatus.OK);
+        return new ResponseEntity<>(this.service.findAvailable(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")

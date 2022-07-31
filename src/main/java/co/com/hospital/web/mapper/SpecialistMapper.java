@@ -1,4 +1,4 @@
-package co.com.hospital.persistence.mapper;
+package co.com.hospital.web.mapper;
 
 import co.com.hospital.domain.dto.specialist.CreateSpecialistDTO;
 import co.com.hospital.domain.dto.specialist.DetailedSpecialistDTO;

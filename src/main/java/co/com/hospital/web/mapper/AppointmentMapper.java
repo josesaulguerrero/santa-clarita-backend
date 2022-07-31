@@ -1,4 +1,4 @@
-package co.com.hospital.persistence.mapper;
+package co.com.hospital.web.mapper;
 
 import co.com.hospital.domain.dto.appointment.CreateAppointmentDTO;
 import co.com.hospital.domain.dto.appointment.DetailedAppointmentDTO;

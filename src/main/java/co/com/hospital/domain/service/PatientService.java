@@ -1,11 +1,6 @@
 package co.com.hospital.domain.service;
 
-import co.com.hospital.domain.dto.patient.CreatePatientDTO;
-import co.com.hospital.domain.dto.patient.DetailedPatientDTO;
-import co.com.hospital.domain.dto.patient.PartialPatientDTO;
-import co.com.hospital.persistence.entities.ClinicalHistory;
 import co.com.hospital.persistence.entities.Patient;
-import co.com.hospital.persistence.mapper.PatientMapper;
 import co.com.hospital.persistence.repository.PatientRepository;
 import co.com.hospital.utils.HttpExceptionBuilder;
 import lombok.AllArgsConstructor;
@@ -20,14 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 public class PatientService {
     private final PatientRepository repository;
-    private final PatientMapper mapper;
     private final ClinicalHistoryService clinicalHistoryService;
 
-    public List<PartialPatientDTO> findAll() {
-        List<Patient> entities = this.repository.findAll();
-        return this.mapper.entitiesToPartialDTOs(entities);
+    public List<Patient> findAll() {
+        return this.repository.findAll();
     }
-    public DetailedPatientDTO findById(Long id) {
+    public Patient findById(Long id) {
         Patient entity = this.repository
                 .findById(id)
                 .orElseThrow(
@@ -36,13 +29,7 @@ public class PatientService {
                                 .statusCode(HttpStatus.NOT_FOUND)
                                 .build()
                 );
-        return mapper.entityToDetailedDTO(entity);
     }
-    public DetailedPatientDTO create(CreatePatientDTO dto){
-        Patient patientFromDTO = this.mapper.createDTOToEntity(dto);
-        Patient savedPatient = this.repository.save(patientFromDTO);
-        ClinicalHistory clinicalHistory = this.clinicalHistoryService.create();
-        this.clinicalHistoryService.assignPatient(clinicalHistory.getId(), savedPatient);
-        return this.mapper.entityToDetailedDTO(savedPatient);
+    public Patient create(Patient entity){
     }
 }

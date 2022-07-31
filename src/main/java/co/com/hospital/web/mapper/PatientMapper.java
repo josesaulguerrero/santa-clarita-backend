@@ -1,4 +1,4 @@
-package co.com.hospital.persistence.mapper;
+package co.com.hospital.web.mapper;
 
 import co.com.hospital.domain.dto.appointment.PartialAppointmentDTO;
 import co.com.hospital.domain.dto.patient.CreatePatientDTO;
@@ -6,7 +6,6 @@ import co.com.hospital.domain.dto.patient.DetailedPatientDTO;
 import co.com.hospital.domain.dto.patient.PartialPatientDTO;
 import co.com.hospital.persistence.entities.Patient;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
