@@ -35,13 +35,13 @@ public class SpecialtyService {
         return this.repository.existsById(id);
     }
 
-    public DetailedSpecialtyDTO create(Specialty entity) {
+    public Specialty create(Specialty entity) {
     }
 
     public Specialty update(Specialty entity) {
     }
 
-    public Specialty assignSpecialist(Specialty entity) {
+    public Specialty assignSpecialist(Long specialtyId, Long specialistId) {
     }
 
     public Specialty delete(Long id) {

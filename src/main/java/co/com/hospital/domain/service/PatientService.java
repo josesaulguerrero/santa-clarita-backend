@@ -21,7 +21,7 @@ public class PatientService {
         return this.repository.findAll();
     }
     public Patient findById(Long id) {
-        Patient entity = this.repository
+        return this.repository
                 .findById(id)
                 .orElseThrow(
                         () -> new HttpExceptionBuilder()
@@ -30,6 +30,12 @@ public class PatientService {
                                 .build()
                 );
     }
+
     public Patient create(Patient entity){
+        Patient savedPatient = this.repository.save(entity);
+        savedPatient.setClinicalHistory(
+                this.clinicalHistoryService.create(savedPatient)
+        );
+        return savedPatient;
     }
 }
