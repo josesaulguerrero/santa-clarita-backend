@@ -43,7 +43,7 @@ public class GlobalHttpErrorExceptionHandler extends ResponseEntityExceptionHand
                                 name,
                                 Arrays.asList(request.getHeaderValues(name))
                         ));
-        System.out.println(headers);
+        headers.put("Content-Type", List.of("application/json"));
         return headers;
     }
 }

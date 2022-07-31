@@ -65,7 +65,7 @@ public class SpecialistService {
 
     public Specialist delete(Long id) {
         Specialist specialistToBeDeleted = this.findById(id);
-        if (this.specialistCanBeDeleted(specialistToBeDeleted)) {
+        if (!this.specialistCanBeDeleted(specialistToBeDeleted)) {
             throw new HttpExceptionBuilder()
                     .developerMessage("The specialist is associated to a Specialty; You cannot delete it.")
                     .statusCode(HttpStatus.FORBIDDEN)
