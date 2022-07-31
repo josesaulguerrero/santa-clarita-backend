@@ -19,7 +19,7 @@ public class ClinicalHistory {
     @OneToMany(mappedBy = "associatedClinicalHistory", fetch = FetchType.EAGER)
     private List<Appointment> appointments;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @JoinColumn(name = "fk_patient", unique = true, insertable = false)
     private Patient associatedPatient;
 

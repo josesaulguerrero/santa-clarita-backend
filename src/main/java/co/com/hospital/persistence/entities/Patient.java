@@ -14,7 +14,7 @@ public class Patient extends Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "associatedPatient", orphanRemoval = true)
+    @OneToOne(mappedBy = "associatedPatient", orphanRemoval = true, fetch = FetchType.EAGER)
     private ClinicalHistory clinicalHistory;
 
     public Patient(Long id) {

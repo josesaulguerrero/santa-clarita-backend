@@ -1,5 +1,6 @@
 package co.com.hospital.domain.service;
 
+import co.com.hospital.persistence.entities.ClinicalHistory;
 import co.com.hospital.persistence.entities.Patient;
 import co.com.hospital.persistence.repository.PatientRepository;
 import co.com.hospital.utils.HttpExceptionBuilder;
@@ -33,9 +34,9 @@ public class PatientService {
 
     public Patient create(Patient entity){
         Patient savedPatient = this.repository.save(entity);
-        savedPatient.setClinicalHistory(
-                this.clinicalHistoryService.create(savedPatient)
-        );
+        ClinicalHistory clinicalHistory = this.clinicalHistoryService.create();
+        clinicalHistory = this.clinicalHistoryService.assignToPatient(clinicalHistory.getId(), savedPatient);
+        savedPatient.setClinicalHistory(clinicalHistory);
         return savedPatient;
     }
 }
