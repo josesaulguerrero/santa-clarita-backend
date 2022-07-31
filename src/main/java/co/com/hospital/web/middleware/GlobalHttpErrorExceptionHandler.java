@@ -22,7 +22,6 @@ public class GlobalHttpErrorExceptionHandler extends ResponseEntityExceptionHand
         Map<String, String> responseBody = new HashMap<>();
         responseBody.put("statusCode", exception.getStatusCode().toString());
         responseBody.put("devMessage", exception.getMessage());
-        responseBody.put("stackTrace", Arrays.toString(exception.getStackTrace()));
         return handleExceptionInternal(
                 exception,
                 responseBody,
