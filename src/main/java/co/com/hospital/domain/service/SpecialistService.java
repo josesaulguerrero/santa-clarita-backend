@@ -59,8 +59,18 @@ public class SpecialistService {
         this.update(specialist);
     }
 
+    private boolean specialistCanBeDeleted(Specialist specialist) {
+        return specialist.getAssociatedSpecialty() == null && specialist.getIsAvailable();
+    }
+
     public Specialist delete(Long id) {
         Specialist specialistToBeDeleted = this.findById(id);
+        if (this.specialistCanBeDeleted(specialistToBeDeleted)) {
+            throw new HttpExceptionBuilder()
+                    .developerMessage("The specialist is associated to a Specialty; You cannot delete it.")
+                    .statusCode(HttpStatus.FORBIDDEN)
+                    .build();
+        }
         this.repository.delete(specialistToBeDeleted);
         return specialistToBeDeleted;
     }
