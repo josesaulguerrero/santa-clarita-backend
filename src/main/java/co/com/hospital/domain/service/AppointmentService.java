@@ -29,7 +29,7 @@ public class AppointmentService {
     public Appointment findById(Long id) {
     }
 
-    public Appointment create(CreateAppointmentDTO dto) {
+    public Appointment create(Appointment entity) {
     }
 
     public Appointment delete(Long id) {
