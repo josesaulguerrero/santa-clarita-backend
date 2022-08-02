@@ -1,6 +1,8 @@
 package co.com.hospital.web.middleware;
 
 import co.com.hospital.utils.HttpException;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,13 +17,16 @@ import java.util.Map;
 import java.util.stream.StreamSupport;
 
 @ControllerAdvice
+@Slf4j
 public class GlobalHttpErrorExceptionHandler extends ResponseEntityExceptionHandler {
-
     @ExceptionHandler(value = {HttpException.class})
     protected ResponseEntity<Object> handleConflict(HttpException exception, WebRequest request) {
         Map<String, String> responseBody = new HashMap<>();
         responseBody.put("statusCode", exception.getStatusCode().toString());
         responseBody.put("devMessage", exception.getMessage());
+        responseBody.put("stackTrace", Arrays.toString(exception.getStackTrace()));
+        String stackTrace = ExceptionUtils.getStackTrace(exception);
+        logger.error(stackTrace);
         return handleExceptionInternal(
                 exception,
                 responseBody,
