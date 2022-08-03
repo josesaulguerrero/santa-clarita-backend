@@ -19,7 +19,7 @@ public class CreateSpecialistDTO {
     private String fullName;
 
     @NotNull(message = "The age of a specialist cannot be null.")
-    @Positive(message = "You cannot supply a negative or zero value for the age of a patient.")
+    @Positive(message = "You cannot supply a negative or zero value for the age of a specialist.")
     @Max(value = 75, message = "People over 75 are not allowed to work in this hospital.")
     private Integer age;
 }
