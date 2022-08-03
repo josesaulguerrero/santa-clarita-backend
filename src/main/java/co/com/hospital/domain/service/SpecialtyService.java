@@ -40,27 +40,27 @@ public class SpecialtyService {
     }
 
     public Specialty create(CreateAndUpdateSpecialtyDTO dto) {
-        Long assignedSpecialistId = entity.getSpecialistInCharge().getId();
-        Specialist assignedSpecialist = this.specialistService.findById(assignedSpecialistId);
-        Specialty specialty = this.repository.save(entity);
-        assignedSpecialist = this.specialistService.assignToSpeciality(assignedSpecialist.getId(), specialty);
+        Long assignedSpecialistId = dto.getSpecialistId();
+        Specialty specialty = new Specialty(dto.getName(), null);
+        Specialist assignedSpecialist = this.specialistService.assignToSpeciality(assignedSpecialistId, specialty);
         specialty.setSpecialistInCharge(assignedSpecialist);
-        return specialty;
+        return this.repository.save(specialty);
     }
 
-    private boolean isValidUpdate(Specialty suppliedEntity, Specialty entityFromDB) {
-        return suppliedEntity.getSpecialistInCharge() == null || !suppliedEntity.getSpecialistInCharge().equals(entityFromDB.getSpecialistInCharge());
+    private boolean isValidUpdate(CreateAndUpdateSpecialtyDTO dto, Specialty entityFromDB) {
+        return dto.getSpecialistId().equals(entityFromDB.getSpecialistInCharge().getId());
     }
 
     public Specialty update(CreateAndUpdateSpecialtyDTO dto) {
-        Specialty specialty = this.findById(entity.getId());
-        if (isValidUpdate(entity, specialty)) {
+        Specialty specialtyFromDB = this.findById(dto.getId());
+        if (!isValidUpdate(dto, specialtyFromDB)) {
             throw new HttpExceptionBuilder()
                     .developerMessage("You cannot re-assign a Specialty's specialist directly.")
                     .statusCode(HttpStatus.FORBIDDEN)
                     .build();
         }
-        return this.repository.save(entity);
+        specialtyFromDB.setName(dto.getName());
+        return specialtyFromDB;
     }
 
     public Specialty assignSpecialist(Long specialtyId, Long specialistId) {
