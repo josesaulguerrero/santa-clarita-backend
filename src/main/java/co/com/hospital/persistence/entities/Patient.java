@@ -14,7 +14,7 @@ public class Patient extends Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "associatedPatient", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "associatedPatient", orphanRemoval = true, fetch = FetchType.LAZY)
     private ClinicalHistory clinicalHistory;
 
     public Patient(Long id) {
@@ -37,5 +37,6 @@ public class Patient extends Person {
         return "Patient{" +
                 "id=" + id +
                 '}';
+
     }
 }

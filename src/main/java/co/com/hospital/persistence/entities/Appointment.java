@@ -20,12 +20,12 @@ public class Appointment {
     @Column(nullable = false)
     private LocalDateTime date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_clinical_history")
     private ClinicalHistory associatedClinicalHistory;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_specialty", insertable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_specialty")
     private Specialty specialtyInCharge;
 
     public Appointment(Long id) {
@@ -43,7 +43,6 @@ public class Appointment {
         return "Appointment{" +
                 "id=" + id +
                 ", date=" + date +
-                ", associatedClinicalHistory=" + associatedClinicalHistory +
                 ", specialtyInCharge=" + specialtyInCharge +
                 '}';
     }

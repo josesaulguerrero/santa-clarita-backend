@@ -17,8 +17,8 @@ public class Specialist extends Person {
     @Column(name = "is_available", nullable = false)
     private Boolean isAvailable;
 
-    @OneToOne
-    @JoinColumn(name = "fk_specialty", insertable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_specialty")
     private Specialty associatedSpecialty;
 
     public Specialist(Long id) {

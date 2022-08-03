@@ -17,7 +17,7 @@ public class Specialty {
 
     private String name;
 
-    @OneToOne(mappedBy = "associatedSpecialty")
+    @OneToOne(mappedBy = "associatedSpecialty", fetch = FetchType.LAZY)
     private Specialist specialistInCharge;
 
     public Specialty(Long id) {

@@ -16,11 +16,11 @@ public class ClinicalHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "associatedClinicalHistory", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "associatedClinicalHistory", orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Appointment> appointments;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-    @JoinColumn(name = "fk_patient", unique = true, insertable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_patient", unique = true)
     private Patient associatedPatient;
 
     public ClinicalHistory(Long id) {
