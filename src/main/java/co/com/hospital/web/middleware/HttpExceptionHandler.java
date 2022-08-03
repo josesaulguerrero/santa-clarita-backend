@@ -22,7 +22,7 @@ public class HttpExceptionHandler extends ApplicationExceptionHandler<HttpExcept
         responseBody.put("stackTrace", Arrays.toString(exception.getStackTrace()));
         super.logStackTrace(exception);
 
-        return handleExceptionInternal(
+        return super.handleExceptionInternal(
                 exception,
                 responseBody,
                 super.mapHeaders(request),
