@@ -18,7 +18,7 @@ import java.util.stream.StreamSupport;
 
 @ControllerAdvice
 @Slf4j
-public class GlobalHttpErrorExceptionHandler extends ResponseEntityExceptionHandler {
+public class HttpExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {HttpException.class})
     protected ResponseEntity<Object> handleConflict(HttpException exception, WebRequest request) {
         Map<String, String> responseBody = new HashMap<>();
