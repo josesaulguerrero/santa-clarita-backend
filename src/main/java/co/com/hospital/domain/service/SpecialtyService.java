@@ -69,6 +69,8 @@ public class SpecialtyService {
                     .statusCode(HttpStatus.FORBIDDEN)
                     .build();
         }
+        Long associatedSpecialistId = specialtyToBeDeleted.getSpecialistInCharge().getId();
+        this.specialistService.removeFromSpecialty(associatedSpecialistId);
         this.repository.delete(specialtyToBeDeleted);
         return specialtyToBeDeleted;
     }
