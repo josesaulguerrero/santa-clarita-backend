@@ -44,20 +44,8 @@ public class ClinicalHistoryService {
         return this.repository.existsById(id);
     }
 
-    public ClinicalHistory create() {
-        ClinicalHistory clinicalHistory = new ClinicalHistory(List.of(), null);
+    public ClinicalHistory create(Patient patient) {
+        ClinicalHistory clinicalHistory = new ClinicalHistory(List.of(), patient);
         return this.repository.save(clinicalHistory);
-    }
-
-    public ClinicalHistory assignToPatient(Long clinicalHistoryId, Patient patient) {
-        ClinicalHistory clinicalHistory = this.findById(clinicalHistoryId);
-        clinicalHistory.setAssociatedPatient(patient);
-        return clinicalHistory;
-    }
-
-    public void addAppointmentRecord(Long clinicalHistoryId, Appointment appointment) {
-        ClinicalHistory clinicalHistory = this.findById(clinicalHistoryId);
-        clinicalHistory.addAppointment(appointment);
-        this.repository.save(clinicalHistory);
     }
 }

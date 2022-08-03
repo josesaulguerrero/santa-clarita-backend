@@ -35,10 +35,9 @@ public class PatientService {
     }
 
     public Patient create(CreatePatientDTO dto) {
-        Patient savedPatient = this.repository.save(entity);
-        ClinicalHistory clinicalHistory = this.clinicalHistoryService.create();
-        clinicalHistory = this.clinicalHistoryService.assignToPatient(clinicalHistory.getId(), savedPatient);
-        savedPatient.setClinicalHistory(clinicalHistory);
-        return savedPatient;
+        Patient patient = new Patient(dto.getDni(), dto.getFullName(), dto.getAge(), null);
+        ClinicalHistory clinicalHistory = this.clinicalHistoryService.create(patient);
+        patient.setClinicalHistory(clinicalHistory);
+        return this.repository.save(patient);
     }
 }
