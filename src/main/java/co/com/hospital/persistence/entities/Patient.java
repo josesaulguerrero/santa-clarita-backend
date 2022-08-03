@@ -15,12 +15,14 @@ import javax.persistence.*;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id"
 )
+@ToString
 public class Patient extends Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(mappedBy = "associatedPatient", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ToString.Exclude
     private ClinicalHistory clinicalHistory;
 
     public Patient(Long id) {
@@ -36,13 +38,5 @@ public class Patient extends Person {
         super(DNI, fullName, age);
         this.id = id;
         this.clinicalHistory = clinicalHistory;
-    }
-
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                '}';
-
     }
 }

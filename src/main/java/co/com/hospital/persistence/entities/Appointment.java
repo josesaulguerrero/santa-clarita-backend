@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id"
@@ -28,10 +29,12 @@ public class Appointment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_clinical_history")
+    @ToString.Exclude
     private ClinicalHistory associatedClinicalHistory;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_specialty")
+    @ToString.Exclude
     private Specialty specialtyInCharge;
 
     public Appointment(Long id) {
@@ -42,14 +45,5 @@ public class Appointment {
         this.date = date;
         this.associatedClinicalHistory = associatedClinicalHistory;
         this.specialtyInCharge = specialtyInCharge;
-    }
-
-    @Override
-    public String toString() {
-        return "Appointment{" +
-                "id=" + id +
-                ", date=" + date +
-                ", specialtyInCharge=" + specialtyInCharge +
-                '}';
     }
 }

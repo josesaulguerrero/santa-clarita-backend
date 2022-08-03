@@ -15,6 +15,7 @@ import javax.persistence.*;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id"
 )
+@ToString
 public class Specialist extends Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +26,7 @@ public class Specialist extends Person {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_specialty")
+    @ToString.Exclude
     private Specialty associatedSpecialty;
 
     public Specialist(Long id) {
@@ -42,13 +44,5 @@ public class Specialist extends Person {
         this.id = id;
         this.isAvailable = isAvailable;
         this.associatedSpecialty = associatedSpecialty;
-    }
-
-    @Override
-    public String toString() {
-        return "Specialist{" +
-                "id=" + id +
-                ", isAvailable=" + isAvailable +
-                '}';
     }
 }

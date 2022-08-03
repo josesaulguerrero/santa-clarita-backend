@@ -17,16 +17,19 @@ import java.util.List;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id"
 )
+@ToString
 public class ClinicalHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(mappedBy = "associatedClinicalHistory", orphanRemoval = true, fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Appointment> appointments;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_patient", unique = true)
+    @ToString.Exclude
     private Patient associatedPatient;
 
     public ClinicalHistory(Long id) {
@@ -40,14 +43,5 @@ public class ClinicalHistory {
 
     public void addAppointment(Appointment appointment) {
         this.appointments.add(appointment);
-    }
-
-    @Override
-    public String toString() {
-        return "ClinicalHistory{" +
-                "id=" + id +
-                ", appointments=" + appointments +
-                ", associatedPatient=" + associatedPatient +
-                '}';
     }
 }

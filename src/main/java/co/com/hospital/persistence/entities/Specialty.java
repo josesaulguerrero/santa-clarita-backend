@@ -16,6 +16,7 @@ import javax.persistence.*;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id"
 )
+@ToString
 public class Specialty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,7 @@ public class Specialty {
     private String name;
 
     @OneToOne(mappedBy = "associatedSpecialty", fetch = FetchType.LAZY)
+    @ToString.Exclude
     private Specialist specialistInCharge;
 
     public Specialty(Long id) {
@@ -33,14 +35,5 @@ public class Specialty {
     public Specialty(String name, Specialist specialistInCharge) {
         this.name = name;
         this.specialistInCharge = specialistInCharge;
-    }
-
-    @Override
-    public String toString() {
-        return "Specialty{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", specialistInCharge=" + specialistInCharge +
-                '}';
     }
 }
