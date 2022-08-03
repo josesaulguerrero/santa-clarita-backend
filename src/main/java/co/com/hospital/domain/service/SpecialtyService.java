@@ -1,6 +1,7 @@
 package co.com.hospital.domain.service;
 
-import co.com.hospital.domain.dto.specialty.CreateAndUpdateSpecialtyDTO;
+import co.com.hospital.domain.dto.specialty.CreateSpecialtyDTO;
+import co.com.hospital.domain.dto.specialty.UpdateSpecialtyDTO;
 import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
 import co.com.hospital.persistence.repository.SpecialtyRepository;
@@ -39,7 +40,7 @@ public class SpecialtyService {
         return this.repository.existsById(id);
     }
 
-    public Specialty create(CreateAndUpdateSpecialtyDTO dto) {
+    public Specialty create(CreateSpecialtyDTO dto) {
         Long assignedSpecialistId = dto.getSpecialistId();
         Specialty specialty = new Specialty(dto.getName(), null);
         Specialist assignedSpecialist = this.specialistService.assignToSpeciality(assignedSpecialistId, specialty);
@@ -47,7 +48,7 @@ public class SpecialtyService {
         return this.repository.save(specialty);
     }
 
-    public Specialty update(CreateAndUpdateSpecialtyDTO dto) {
+    public Specialty update(UpdateSpecialtyDTO dto) {
         Specialty specialty = this.findById(dto.getId());
         if (!dto.getSpecialistId().equals(specialty.getSpecialistInCharge().getId())) {
             this.specialistService.removeFromSpecialty(specialty.getSpecialistInCharge().getId());

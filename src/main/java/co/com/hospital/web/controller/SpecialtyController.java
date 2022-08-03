@@ -1,13 +1,11 @@
 package co.com.hospital.web.controller;
 
-import co.com.hospital.domain.dto.specialist.PartialSpecialistDTO;
-import co.com.hospital.domain.dto.specialty.CreateAndUpdateSpecialtyDTO;
+import co.com.hospital.domain.dto.specialty.CreateSpecialtyDTO;
 import co.com.hospital.domain.dto.specialty.DetailedSpecialtyDTO;
 import co.com.hospital.domain.dto.specialty.PartialSpecialtyDTO;
+import co.com.hospital.domain.dto.specialty.UpdateSpecialtyDTO;
 import co.com.hospital.domain.service.SpecialtyService;
-import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
-import co.com.hospital.web.mapper.SpecialistMapper;
 import co.com.hospital.web.mapper.SpecialtyMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -41,16 +39,14 @@ public class SpecialtyController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<DetailedSpecialtyDTO> post(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
-        dto.validateCreationDTO();
+    public ResponseEntity<DetailedSpecialtyDTO> post(@RequestBody CreateSpecialtyDTO dto) {
         Specialty savedEntity = this.service.create(dto);
         DetailedSpecialtyDTO savedEntityDTO = this.mapper.entityToDetailedDTO(savedEntity);
         return new ResponseEntity<>(savedEntityDTO, HttpStatus.CREATED);
     }
 
     @PutMapping("update")
-    public ResponseEntity<DetailedSpecialtyDTO> update(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
-        //dto.validateUpdateDTO(); TODO validate dto accurately.
+    public ResponseEntity<DetailedSpecialtyDTO> update(@RequestBody UpdateSpecialtyDTO dto) {
         Specialty updatedEntity = this.service.update(dto);
         DetailedSpecialtyDTO updatedEntityDTO = this.mapper.entityToDetailedDTO(updatedEntity);
         return new ResponseEntity<>(updatedEntityDTO, HttpStatus.ACCEPTED);
