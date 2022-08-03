@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -43,14 +44,16 @@ public class AppointmentService {
                 );
     }
 
-    public Appointment create(Appointment entity) {
-        Long specialtyId = entity.getSpecialtyInCharge().getId();
+    public Appointment create(CreateAppointmentDTO dto) {
+        Long specialtyId = dto.getSpecialtyId();
         Specialty takenAt = this.specialtyService.findById(specialtyId);
-        Long clinicalHistoryId = entity.getAssociatedClinicalHistory().getId();
-        ClinicalHistory clinicalHistory = this.clinicalHistoryService.findById(clinicalHistoryId);
-        Appointment appointment = new Appointment(entity.getDate(), clinicalHistory, takenAt);
-        this.clinicalHistoryService.addAppointmentRecord(clinicalHistoryId, appointment);
-        return appointment;
+        Long patientId = dto.getPatientId();
+        ClinicalHistory clinicalHistory = this.clinicalHistoryService.findByPatientId(patientId);
+        Appointment appointment = new Appointment(LocalDateTime.now(), clinicalHistory, takenAt);
+        Appointment savedAppointment = this.repository.save(appointment);
+        this.clinicalHistoryService.addAppointmentRecord(patientId, savedAppointment);
+        System.out.println(savedAppointment);
+        return this.repository.save(savedAppointment);
     }
 
     public Appointment delete(Long id) {

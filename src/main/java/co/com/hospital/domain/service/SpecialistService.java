@@ -1,5 +1,6 @@
 package co.com.hospital.domain.service;
 
+import co.com.hospital.domain.dto.specialist.CreateSpecialistDTO;
 import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
 import co.com.hospital.persistence.repository.SpecialistRepository;
@@ -35,13 +36,13 @@ public class SpecialistService {
                 );
     }
 
-    public Specialist create(Specialist entity) {
+    public Specialist create(CreateSpecialistDTO dto) {
         entity.setAssociatedSpecialty(null);
         entity.setIsAvailable(true);
         return this.repository.save(entity);
     }
 
-    private Specialist update(Specialist specialist) {
+    private Specialist update(CreateSpecialistDTO dto) {
         return this.repository.save(specialist);
     }
 

@@ -1,5 +1,6 @@
 package co.com.hospital.domain.service;
 
+import co.com.hospital.domain.dto.patient.CreatePatientDTO;
 import co.com.hospital.persistence.entities.ClinicalHistory;
 import co.com.hospital.persistence.entities.Patient;
 import co.com.hospital.persistence.repository.PatientRepository;
@@ -21,6 +22,7 @@ public class PatientService {
     public List<Patient> findAll() {
         return this.repository.findAll();
     }
+
     public Patient findById(Long id) {
         return this.repository
                 .findById(id)
@@ -32,7 +34,7 @@ public class PatientService {
                 );
     }
 
-    public Patient create(Patient entity){
+    public Patient create(CreatePatientDTO dto) {
         Patient savedPatient = this.repository.save(entity);
         ClinicalHistory clinicalHistory = this.clinicalHistoryService.create();
         clinicalHistory = this.clinicalHistoryService.assignToPatient(clinicalHistory.getId(), savedPatient);
