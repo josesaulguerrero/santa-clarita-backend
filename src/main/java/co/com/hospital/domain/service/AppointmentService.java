@@ -50,10 +50,7 @@ public class AppointmentService {
         Long patientId = dto.getPatientId();
         ClinicalHistory clinicalHistory = this.clinicalHistoryService.findByPatientId(patientId);
         Appointment appointment = new Appointment(LocalDateTime.now(), clinicalHistory, takenAt);
-        Appointment savedAppointment = this.repository.save(appointment);
-        this.clinicalHistoryService.addAppointmentRecord(patientId, savedAppointment);
-        System.out.println(savedAppointment);
-        return this.repository.save(savedAppointment);
+        return this.repository.save(appointment);
     }
 
     public Appointment delete(Long id) {
