@@ -51,8 +51,8 @@ public class AppointmentController {
 
     @PostMapping
     public ResponseEntity<DetailedAppointmentDTO> post(@RequestBody CreateAppointmentDTO dto) {
-        Appointment entity = this.service.create(this.mapper.createDTOToEntity(dto));
-        return new ResponseEntity<>(this.mapper.entityToDetailedDTO(entity), HttpStatus.CREATED);
+        Appointment savedEntity = this.service.create(dto);
+        return new ResponseEntity<>(this.mapper.entityToDetailedDTO(savedEntity), HttpStatus.CREATED);
     }
 
     @DeleteMapping("{id}")

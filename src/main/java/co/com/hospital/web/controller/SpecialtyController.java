@@ -23,7 +23,6 @@ import java.util.List;
 public class SpecialtyController {
     private final SpecialtyService service;
     private final SpecialtyMapper mapper;
-    private final SpecialistMapper specialistMapper;
 
     @GetMapping
     public ResponseEntity<List<PartialSpecialtyDTO>> getAll() {
@@ -44,20 +43,16 @@ public class SpecialtyController {
     @PostMapping
     public ResponseEntity<DetailedSpecialtyDTO> post(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
         dto.validateCreationDTO();
-        Specialty entityFromDTO = this.mapper.createDTOToEntity(dto);
-        DetailedSpecialtyDTO savedEntityDTO = this.mapper.entityToDetailedDTO(
-                this.service.create(entityFromDTO)
-        );
+        Specialty savedEntity = this.service.create(dto);
+        DetailedSpecialtyDTO savedEntityDTO = this.mapper.entityToDetailedDTO(savedEntity);
         return new ResponseEntity<>(savedEntityDTO, HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<DetailedSpecialtyDTO> update(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
         dto.validateUpdateDTO();
-        Specialty entityFromDTO = this.mapper.updateDTOToEntity(dto);
-        DetailedSpecialtyDTO updatedEntityDTO = this.mapper.entityToDetailedDTO(
-                this.service.update(entityFromDTO)
-        );
+        Specialty updatedEntity = this.service.update(dto);
+        DetailedSpecialtyDTO updatedEntityDTO = this.mapper.entityToDetailedDTO(updatedEntity);
         return new ResponseEntity<>(updatedEntityDTO, HttpStatus.ACCEPTED);
     }
 

@@ -35,10 +35,8 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity<DetailedPatientDTO> post(@RequestBody CreatePatientDTO dto) {
-        Patient entityToSave = this.mapper.createDTOToEntity(dto);
-        DetailedPatientDTO mappedPatient = this.mapper.entityToDetailedDTO(
-                this.service.create(entityToSave)
-        );
+        Patient savedEntity = this.service.create(dto);
+        DetailedPatientDTO mappedPatient = this.mapper.entityToDetailedDTO(savedEntity);
         return new ResponseEntity<>(mappedPatient, HttpStatus.CREATED);
     }
 }

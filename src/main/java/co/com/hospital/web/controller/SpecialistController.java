@@ -47,10 +47,8 @@ public class SpecialistController {
 
     @PostMapping
     public ResponseEntity<DetailedSpecialistDTO> post(@RequestBody CreateSpecialistDTO dto) {
-        Specialist entityToSave = this.mapper.createDTOToEntity(dto);
-        DetailedSpecialistDTO savedEntityDTO = this.mapper.entityToDetailedDTO(
-                this.service.create(entityToSave)
-        );
+        Specialist savedEntity = this.service.create(dto);
+        DetailedSpecialistDTO savedEntityDTO = this.mapper.entityToDetailedDTO(savedEntity);
         return new ResponseEntity<>(savedEntityDTO, HttpStatus.CREATED);
     }
 
