@@ -1,6 +1,5 @@
 package co.com.hospital.domain.service;
 
-import co.com.hospital.persistence.entities.Appointment;
 import co.com.hospital.persistence.entities.ClinicalHistory;
 import co.com.hospital.persistence.entities.Patient;
 import co.com.hospital.persistence.repository.ClinicalHistoryRepository;
@@ -38,10 +37,6 @@ public class ClinicalHistoryService {
                                 .statusCode(HttpStatus.NOT_FOUND)
                                 .build()
                 );
-    }
-
-    public Boolean exists(Long id) {
-        return this.repository.existsById(id);
     }
 
     public ClinicalHistory create(Patient patient) {
