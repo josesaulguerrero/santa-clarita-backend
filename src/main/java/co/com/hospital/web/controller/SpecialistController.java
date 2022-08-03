@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -46,7 +47,7 @@ public class SpecialistController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<DetailedSpecialistDTO> post(@RequestBody CreateSpecialistDTO dto) {
+    public ResponseEntity<DetailedSpecialistDTO> post(@RequestBody @Valid CreateSpecialistDTO dto) {
         Specialist savedEntity = this.service.create(dto);
         DetailedSpecialistDTO savedEntityDTO = this.mapper.entityToDetailedDTO(savedEntity);
         return new ResponseEntity<>(savedEntityDTO, HttpStatus.CREATED);

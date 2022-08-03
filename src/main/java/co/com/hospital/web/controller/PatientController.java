@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -34,7 +35,7 @@ public class PatientController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<DetailedPatientDTO> post(@RequestBody CreatePatientDTO dto) {
+    public ResponseEntity<DetailedPatientDTO> post(@RequestBody @Valid CreatePatientDTO dto) {
         Patient savedEntity = this.service.create(dto);
         DetailedPatientDTO mappedPatient = this.mapper.entityToDetailedDTO(savedEntity);
         return new ResponseEntity<>(mappedPatient, HttpStatus.CREATED);

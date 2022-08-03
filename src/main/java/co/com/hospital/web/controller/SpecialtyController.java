@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -39,14 +40,14 @@ public class SpecialtyController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<DetailedSpecialtyDTO> post(@RequestBody CreateSpecialtyDTO dto) {
+    public ResponseEntity<DetailedSpecialtyDTO> post(@RequestBody @Valid CreateSpecialtyDTO dto) {
         Specialty savedEntity = this.service.create(dto);
         DetailedSpecialtyDTO savedEntityDTO = this.mapper.entityToDetailedDTO(savedEntity);
         return new ResponseEntity<>(savedEntityDTO, HttpStatus.CREATED);
     }
 
     @PutMapping("update")
-    public ResponseEntity<DetailedSpecialtyDTO> update(@RequestBody UpdateSpecialtyDTO dto) {
+    public ResponseEntity<DetailedSpecialtyDTO> update(@RequestBody @Valid UpdateSpecialtyDTO dto) {
         Specialty updatedEntity = this.service.update(dto);
         DetailedSpecialtyDTO updatedEntityDTO = this.mapper.entityToDetailedDTO(updatedEntity);
         return new ResponseEntity<>(updatedEntityDTO, HttpStatus.ACCEPTED);
