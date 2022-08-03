@@ -1,10 +1,8 @@
 package co.com.hospital.web.mapper;
 
 import co.com.hospital.domain.dto.specialist.PartialSpecialistDTO;
-import co.com.hospital.domain.dto.specialty.CreateAndUpdateSpecialtyDTO;
 import co.com.hospital.domain.dto.specialty.DetailedSpecialtyDTO;
 import co.com.hospital.domain.dto.specialty.PartialSpecialtyDTO;
-import co.com.hospital.persistence.entities.Specialist;
 import co.com.hospital.persistence.entities.Specialty;
 import lombok.AllArgsConstructor;
 
@@ -36,28 +34,6 @@ public class SpecialtyMapper {
                 entity.getId(),
                 entity.getName(),
                 specialist
-        );
-    }
-
-    public List<DetailedSpecialtyDTO> entitiesToDetailedDTOs(List<Specialty> entities) {
-        return entities
-                .stream()
-                .map(this::entityToDetailedDTO)
-                .toList();
-    }
-
-    public Specialty createDTOToEntity(CreateAndUpdateSpecialtyDTO dto) {
-        return new Specialty(
-                dto.getName(),
-                new Specialist(dto.getSpecialistId())
-        );
-    }
-
-    public Specialty updateDTOToEntity(CreateAndUpdateSpecialtyDTO dto) {
-        return new Specialty(
-                dto.getId(),
-                dto.getName(),
-                new Specialist(dto.getSpecialistId())
         );
     }
 }

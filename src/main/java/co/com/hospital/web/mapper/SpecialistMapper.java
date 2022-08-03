@@ -1,6 +1,5 @@
 package co.com.hospital.web.mapper;
 
-import co.com.hospital.domain.dto.specialist.CreateSpecialistDTO;
 import co.com.hospital.domain.dto.specialist.DetailedSpecialistDTO;
 import co.com.hospital.domain.dto.specialist.PartialSpecialistDTO;
 import co.com.hospital.persistence.entities.Specialist;
@@ -35,23 +34,6 @@ public class SpecialistMapper {
                 entity.getAge(),
                 entity.getIsAvailable(),
                 specialtyId
-        );
-    }
-
-    public List<DetailedSpecialistDTO> entitiesToDetailedDTOs(List<Specialist> entities) {
-        return entities
-                .stream()
-                .map(this::entityToDetailedDTO)
-                .toList();
-    }
-
-    public Specialist createDTOToEntity(CreateSpecialistDTO dto) {
-        return new Specialist(
-                dto.getDni(),
-                dto.getFullName(),
-                dto.getAge(),
-                true, // specialists are avaialable by default when they are created.
-                null // assign specialty if necessary on the service.
         );
     }
 }

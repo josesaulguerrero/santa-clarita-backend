@@ -1,7 +1,6 @@
 package co.com.hospital.web.mapper;
 
 import co.com.hospital.domain.dto.appointment.PartialAppointmentDTO;
-import co.com.hospital.domain.dto.patient.CreatePatientDTO;
 import co.com.hospital.domain.dto.patient.DetailedPatientDTO;
 import co.com.hospital.domain.dto.patient.PartialPatientDTO;
 import co.com.hospital.persistence.entities.Patient;
@@ -40,22 +39,6 @@ public class PatientMapper {
                 entity.getFullName(),
                 entity.getAge(),
                 appointments
-        );
-    }
-
-    public List<DetailedPatientDTO> entitiesToDetailedDTOs(List<Patient> entities) {
-        return entities
-                .stream()
-                .map(this::entityToDetailedDTO)
-                .toList();
-    }
-
-    public Patient createDTOToEntity(CreatePatientDTO dto) {
-        return new Patient(
-                dto.getDni(),
-                dto.getFullName(),
-                dto.getAge(),
-                null // clinical history is assigned on the service
         );
     }
 }
