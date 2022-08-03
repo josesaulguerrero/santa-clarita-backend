@@ -50,20 +50,9 @@ public class SpecialtyController {
 
     @PutMapping("update")
     public ResponseEntity<DetailedSpecialtyDTO> update(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
-        dto.validateUpdateDTO();
+        //dto.validateUpdateDTO(); TODO validate dto accurately.
         Specialty updatedEntity = this.service.update(dto);
         DetailedSpecialtyDTO updatedEntityDTO = this.mapper.entityToDetailedDTO(updatedEntity);
-        return new ResponseEntity<>(updatedEntityDTO, HttpStatus.ACCEPTED);
-    }
-
-    @PutMapping("{specialtyId}/specialist")
-    public ResponseEntity<DetailedSpecialtyDTO> assignNewSpecialist(
-            @PathVariable("specialtyId") Long specialtyId,
-            @RequestBody PartialSpecialistDTO dto
-    ) {
-        DetailedSpecialtyDTO updatedEntityDTO = this.mapper.entityToDetailedDTO(
-                this.service.assignSpecialist(specialtyId, dto.getId())
-        );
         return new ResponseEntity<>(updatedEntityDTO, HttpStatus.ACCEPTED);
     }
 

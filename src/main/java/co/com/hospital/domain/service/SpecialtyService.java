@@ -47,31 +47,14 @@ public class SpecialtyService {
         return this.repository.save(specialty);
     }
 
-    private boolean isValidUpdate(CreateAndUpdateSpecialtyDTO dto, Specialty entityFromDB) {
-        return dto.getSpecialistId().equals(entityFromDB.getSpecialistInCharge().getId());
-    }
-
     public Specialty update(CreateAndUpdateSpecialtyDTO dto) {
-        Specialty specialtyFromDB = this.findById(dto.getId());
-        if (!isValidUpdate(dto, specialtyFromDB)) {
-            throw new HttpExceptionBuilder()
-                    .developerMessage("You cannot re-assign a Specialty's specialist directly.")
-                    .statusCode(HttpStatus.FORBIDDEN)
-                    .build();
+        Specialty specialty = this.findById(dto.getId());
+        if (!dto.getSpecialistId().equals(specialty.getSpecialistInCharge().getId())) {
+            this.specialistService.removeFromSpecialty(specialty.getSpecialistInCharge().getId());
+            this.specialistService.assignToSpeciality(dto.getSpecialistId(), specialty);
         }
-        specialtyFromDB.setName(dto.getName());
-        return specialtyFromDB;
-    }
-
-    public Specialty assignSpecialist(Long specialtyId, Long specialistId) {
-        Specialty specialty = this.findById(specialtyId);
-        Long previousSpecialistId = specialty.getSpecialistInCharge().getId();
-        Specialist previousSpecialist = this.specialistService.findById(previousSpecialistId);
-        this.specialistService.removeFromSpecialty(previousSpecialist.getId());
-        Specialist newSpecialist = this.specialistService.findById(specialistId);
-        newSpecialist = this.specialistService.assignToSpeciality(newSpecialist.getId(), specialty);
-        specialty.setSpecialistInCharge(newSpecialist);
-        return this.repository.save(specialty);
+        specialty.setName(dto.getName());
+        return specialty;
     }
 
     private boolean specialtyCanBeDeleted(Long specialtyId) {
