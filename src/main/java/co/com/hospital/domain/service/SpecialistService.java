@@ -37,27 +37,27 @@ public class SpecialistService {
     }
 
     public Specialist create(CreateSpecialistDTO dto) {
-        entity.setAssociatedSpecialty(null);
-        entity.setIsAvailable(true);
-        return this.repository.save(entity);
-    }
-
-    private Specialist update(CreateSpecialistDTO dto) {
+        Specialist specialist = new Specialist(
+                dto.getDni(),
+                dto.getFullName(),
+                dto.getAge(),
+                true, // specialists are available by default.
+                null
+        );
         return this.repository.save(specialist);
     }
-
     public Specialist assignToSpeciality(Long specialistId, Specialty specialty) {
         Specialist specialist = this.findById(specialistId);
         specialist.setAssociatedSpecialty(specialty);
         specialist.setIsAvailable(false);
-        return this.update(specialist);
+        return this.repository.save(specialist);
     }
 
     public void removeFromSpecialty(Long specialistId) {
         Specialist specialist = this.findById(specialistId);
         specialist.setAssociatedSpecialty(null);
         specialist.setIsAvailable(true);
-        this.update(specialist);
+        this.repository.save(specialist);
     }
 
     private boolean specialistCanBeDeleted(Specialist specialist) {
