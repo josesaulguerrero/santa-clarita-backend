@@ -21,7 +21,7 @@ public class SpecialistController {
     private final SpecialistService service;
     private final SpecialistMapper mapper;
 
-    @GetMapping
+    @GetMapping("all")
     public ResponseEntity<List<PartialSpecialistDTO>> getAll() {
         List<PartialSpecialistDTO> DTOs = this.mapper.entitiesToPartialDTOs(
                 this.service.findAll()
@@ -29,7 +29,7 @@ public class SpecialistController {
         return new ResponseEntity<>(DTOs, HttpStatus.OK);
     }
 
-    @GetMapping("available")
+    @GetMapping("all/available")
     public ResponseEntity<List<PartialSpecialistDTO>> getAllAvailable() {
         List<PartialSpecialistDTO> DTOs = this.mapper.entitiesToPartialDTOs(
                 this.service.findAvailable()
@@ -45,7 +45,7 @@ public class SpecialistController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("save")
     public ResponseEntity<DetailedSpecialistDTO> post(@RequestBody CreateSpecialistDTO dto) {
         Specialist savedEntity = this.service.create(dto);
         DetailedSpecialistDTO savedEntityDTO = this.mapper.entityToDetailedDTO(savedEntity);

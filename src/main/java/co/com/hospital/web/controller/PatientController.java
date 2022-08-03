@@ -21,7 +21,7 @@ public class PatientController {
     private final PatientService service;
     private final PatientMapper mapper;
 
-    @GetMapping
+    @GetMapping("all")
     public ResponseEntity<List<PartialPatientDTO>> getAll() {
         List<PartialPatientDTO> mappedPatients = this.mapper.entitiesToPartialDTOs(this.service.findAll());
         return new ResponseEntity<>(mappedPatients, HttpStatus.OK);
@@ -33,7 +33,7 @@ public class PatientController {
         return new ResponseEntity<>(mappedPatient, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("save")
     public ResponseEntity<DetailedPatientDTO> post(@RequestBody CreatePatientDTO dto) {
         Patient savedEntity = this.service.create(dto);
         DetailedPatientDTO mappedPatient = this.mapper.entityToDetailedDTO(savedEntity);

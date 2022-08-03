@@ -21,7 +21,7 @@ public class AppointmentController {
     private final AppointmentService service;
     private final AppointmentMapper mapper;
 
-    @GetMapping
+    @GetMapping("all")
     public ResponseEntity<List<PartialAppointmentDTO>> getAll() {
         List<PartialAppointmentDTO> mappedAppointments = mapper.entitiesToPartialDTOs(this.service.findAll());
         return new ResponseEntity<>(mappedAppointments, HttpStatus.OK);
@@ -49,7 +49,7 @@ public class AppointmentController {
         return new ResponseEntity<>(mappedAppointment, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("save")
     public ResponseEntity<DetailedAppointmentDTO> post(@RequestBody CreateAppointmentDTO dto) {
         Appointment savedEntity = this.service.create(dto);
         return new ResponseEntity<>(this.mapper.entityToDetailedDTO(savedEntity), HttpStatus.CREATED);

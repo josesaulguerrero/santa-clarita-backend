@@ -24,7 +24,7 @@ public class SpecialtyController {
     private final SpecialtyService service;
     private final SpecialtyMapper mapper;
 
-    @GetMapping
+    @GetMapping("all")
     public ResponseEntity<List<PartialSpecialtyDTO>> getAll() {
         List<PartialSpecialtyDTO> DTOs = this.mapper.entitiesToPartialDTOs(
                 this.service.findAll()
@@ -40,7 +40,7 @@ public class SpecialtyController {
         return new ResponseEntity<>(DTO, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("save")
     public ResponseEntity<DetailedSpecialtyDTO> post(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
         dto.validateCreationDTO();
         Specialty savedEntity = this.service.create(dto);
@@ -48,7 +48,7 @@ public class SpecialtyController {
         return new ResponseEntity<>(savedEntityDTO, HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @PutMapping("update")
     public ResponseEntity<DetailedSpecialtyDTO> update(@RequestBody CreateAndUpdateSpecialtyDTO dto) {
         dto.validateUpdateDTO();
         Specialty updatedEntity = this.service.update(dto);
