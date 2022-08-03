@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.StreamSupport;
 
-@ControllerAdvice
+@ControllerAdvice(assignableTypes = {HttpException.class})
 @Slf4j
 public class HttpExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {HttpException.class})
