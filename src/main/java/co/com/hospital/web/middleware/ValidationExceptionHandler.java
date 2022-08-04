@@ -43,13 +43,11 @@ public class ValidationExceptionHandler extends ApplicationExceptionHandler<Meth
                 .collect(Collectors.joining(", "));
 
         responseBody.put("devMessage", errors);
-        responseBody.put("stackTrace", Arrays.toString(exception.getStackTrace()));
         responseBody.put("statusCode", httpStatus.toString());
         super.logStackTrace(exception);
 
         return ResponseEntity
                 .badRequest()
-                .headers(super.mapHeaders(request))
                 .body(responseBody);
     }
 }

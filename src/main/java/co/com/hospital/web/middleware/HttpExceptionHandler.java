@@ -19,12 +19,10 @@ public class HttpExceptionHandler extends ApplicationExceptionHandler<HttpExcept
         Map<String, String> responseBody = new HashMap<>();
         responseBody.put("statusCode", exception.getStatusCode().toString());
         responseBody.put("devMessage", exception.getMessage());
-        responseBody.put("stackTrace", ExceptionUtils.getStackTrace(exception));
         super.logStackTrace(exception);
 
         return ResponseEntity
                 .status(exception.getStatusCode())
-                .headers(super.mapHeaders(request))
                 .body(responseBody);
     }
 }
