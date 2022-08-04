@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,12 +22,9 @@ public class HttpExceptionHandler extends ApplicationExceptionHandler<HttpExcept
         responseBody.put("stackTrace", ExceptionUtils.getStackTrace(exception));
         super.logStackTrace(exception);
 
-        return super.handleExceptionInternal(
-                exception,
-                responseBody,
-                super.mapHeaders(request),
-                exception.getStatusCode(),
-                request
-        );
+        return ResponseEntity
+                .status(exception.getStatusCode())
+                .headers(super.mapHeaders(request))
+                .body(responseBody);
     }
 }

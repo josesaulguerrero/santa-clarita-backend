@@ -47,6 +47,9 @@ public class ValidationExceptionHandler extends ApplicationExceptionHandler<Meth
         responseBody.put("statusCode", httpStatus.toString());
         super.logStackTrace(exception);
 
-        return new ResponseEntity<>(responseBody, HttpStatus.BAD_REQUEST);
+        return ResponseEntity
+                .badRequest()
+                .headers(super.mapHeaders(request))
+                .body(responseBody);
     }
 }
