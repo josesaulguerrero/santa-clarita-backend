@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.StreamSupport;
 
 public abstract class ApplicationExceptionHandler<E extends Exception> extends ResponseEntityExceptionHandler {
@@ -23,7 +24,7 @@ public abstract class ApplicationExceptionHandler<E extends Exception> extends R
                 .forEach(name ->
                         headers.put(
                                 name,
-                                Arrays.asList(request.getHeaderValues(name))
+                                Arrays.asList(Objects.requireNonNull(request.getHeaderValues(name)))
                         ));
         headers.put("Content-Type", List.of("application/json"));
         return headers;
